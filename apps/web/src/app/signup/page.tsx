@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
@@ -23,7 +24,7 @@ export default function SignUpPage() {
       toast.error("Please enter a password.");
       return;
     }
-    
+
     setIsLoading(true);
     try {
       const response = await fetch("http://localhost:3001/auth/signup", {
@@ -56,19 +57,19 @@ export default function SignUpPage() {
   return (
     <div className="flex flex-col items-center min-h-screen p-8 relative w-full overflow-y-auto">
       {/* Atmospheric Background Shader */}
-      <div 
+      <div
         className="absolute top-0 left-0 w-full h-full -z-10 opacity-50"
         style={{
           background: "radial-gradient(circle at 15% 20%, #171f33 0%, transparent 45%), radial-gradient(circle at 85% 80%, #0b1326 0%, transparent 45%)"
         }}
       />
-      
+
       {/* Main Content Container */}
       <main className="w-full max-w-[440px] relative z-10 my-auto shrink-0">
         {/* Header / Logo */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 mb-2">
-            <span className="material-symbols-outlined text-primary text-[36px]">bubble_chart</span>
+            <Image src="/logo.png" alt="LeadForge AI Logo" width={40} height={40} className="object-contain" />
             <h1 className="font-headline-lg text-headline-lg tracking-tight text-on-surface">LeadForge AI</h1>
           </div>
           <p className="font-body-md text-body-md text-on-surface-variant">Accelerate your enterprise intelligence.</p>
@@ -82,7 +83,7 @@ export default function SignUpPage() {
           </div>
 
           {/* Social Login */}
-          <button 
+          <button
             type="button"
             onClick={handleGoogleSignUp}
             className="w-full h-12 flex items-center justify-center gap-3 bg-surface-container-high hover:bg-surface-container-highest transition-all border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface group"
@@ -108,9 +109,9 @@ export default function SignUpPage() {
               <label className={`font-label-sm text-label-sm uppercase ${focusedInput === 'email' ? 'text-primary' : 'text-on-surface-variant'}`}>
                 Email Address
               </label>
-              <input 
-                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-outline/50" 
-                placeholder="name@company.com" 
+              <input
+                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-outline/50"
+                placeholder="name@company.com"
                 type="email"
                 value={emailAddress}
                 onChange={(e) => setEmailAddress(e.target.value)}
@@ -118,16 +119,16 @@ export default function SignUpPage() {
                 onBlur={() => setFocusedInput(null)}
               />
             </div>
-            
+
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                 <label className={`font-label-sm text-label-sm uppercase ${focusedInput === 'password' ? 'text-primary' : 'text-on-surface-variant'}`}>
                   Password
                 </label>
               </div>
-              <input 
-                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-outline/50" 
-                placeholder="••••••••" 
+              <input
+                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-outline/50"
+                placeholder="••••••••"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -135,8 +136,8 @@ export default function SignUpPage() {
                 onBlur={() => setFocusedInput(null)}
               />
             </div>
-            
-            <button 
+
+            <button
               type="submit"
               disabled={isLoading}
               className={`w-full h-12 mt-2 bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm rounded-lg transition-all active:scale-[0.98] duration-150 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
@@ -149,7 +150,7 @@ export default function SignUpPage() {
 
         {/* Footer Actions */}
         <p className="text-center mt-10 font-body-md text-body-md text-outline">
-          Already have an account? 
+          Already have an account?
           <a className="text-primary font-semibold hover:text-primary-container transition-colors ml-1" href="/login">Sign in</a>
         </p>
       </main>
@@ -158,8 +159,8 @@ export default function SignUpPage() {
       <div className="hidden lg:block absolute right-16 top-1/2 -translate-y-1/2 w-72 h-auto overflow-hidden pointer-events-none">
         <div className="glass-card w-full rounded-xl p-6 border-outline-variant/30 flex flex-col gap-6 opacity-30">
           <div className="aspect-video rounded bg-surface-container-highest overflow-hidden relative">
-            <Image 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuADUsPISaiQ8KZpONb0CFQNLWdl4MAZ7rccBpsXTXKNhL01IbuyvFIoq0a4YdajL3qzVQ2Usfn0pHeGNXqk2F-a1bGbBvKDEi7-wIXExBIfxdzWLmfiCvaIPf_aZauedG4MHVHQmg9rTP1tNXhfmw9EG8In481ZYCqZcjfsWwaYo07TvV6opUGJWfFTcxNCWYrA7SZd23DklJF1kCwl5b395Z6yTcXudCjuf0a4ShpfObcUTwCBJ1mVBg" 
+            <Image
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuADUsPISaiQ8KZpONb0CFQNLWdl4MAZ7rccBpsXTXKNhL01IbuyvFIoq0a4YdajL3qzVQ2Usfn0pHeGNXqk2F-a1bGbBvKDEi7-wIXExBIfxdzWLmfiCvaIPf_aZauedG4MHVHQmg9rTP1tNXhfmw9EG8In481ZYCqZcjfsWwaYo07TvV6opUGJWfFTcxNCWYrA7SZd23DklJF1kCwl5b395Z6yTcXudCjuf0a4ShpfObcUTwCBJ1mVBg"
               alt="A macro close-up of a high-tech microprocessor"
               fill
               className="object-cover grayscale"

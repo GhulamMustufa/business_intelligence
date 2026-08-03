@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import type { IDiscoveryProvider } from '../discovery/interfaces/discovery-provider.interface';
+import { EnrichmentService } from './enrichment.service';
 
 export interface GetCompaniesFilters {
   search?: string;
@@ -17,7 +18,8 @@ export interface GetCompaniesFilters {
 export class CompaniesService {
   constructor(
     private prisma: PrismaService,
-    @Inject('DISCOVERY_PROVIDER') private discoveryProvider: IDiscoveryProvider
+    @Inject('DISCOVERY_PROVIDER') private discoveryProvider: IDiscoveryProvider,
+    private enrichmentService: EnrichmentService
   ) {}
 
   async findAll(filters: GetCompaniesFilters) {
@@ -35,6 +37,10 @@ export class CompaniesService {
       if (discovered.length > 0) {
         for (const business of discovered) {
           discoveredNames.push(business.name);
+          
+          // Enrich the company data
+          const enriched = await this.enrichmentService.enrichCompanyData(business.name, business.website);
+          
           const existing = await this.prisma.company.findFirst({
             where: { name: business.name }
           });
@@ -43,7 +49,9 @@ export class CompaniesService {
             await this.prisma.company.update({
               where: { id: existing.id },
               data: {
-                website: business.website || existing.website,
+                website: enriched.website || business.website || existing.website,
+                logoUrl: enriched.logoUrl || existing.logoUrl,
+                linkedInUrl: enriched.linkedInUrl || existing.linkedInUrl,
                 location: business.location || existing.location,
                 googleRating: business.rating || existing.googleRating,
                 phone: business.phone || existing.phone,
@@ -53,7 +61,9 @@ export class CompaniesService {
             await this.prisma.company.create({
               data: {
                 name: business.name,
-                website: business.website || 'https://example.com',
+                website: enriched.website || business.website || 'https://example.com',
+                logoUrl: enriched.logoUrl || null,
+                linkedInUrl: enriched.linkedInUrl || null,
                 location: business.location || 'Unknown',
                 industry: business.industry || 'Unknown',
                 phone: business.phone || null,

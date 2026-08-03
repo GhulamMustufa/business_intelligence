@@ -68,7 +68,7 @@ export default function LoginPage() {
         {/* Header / Logo */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 mb-2">
-            <span className="material-symbols-outlined text-primary text-[36px]">bubble_chart</span>
+            <Image src="/logo.png" alt="LeadForge AI Logo" width={40} height={40} className="object-contain" />
             <h1 className="font-headline-lg text-headline-lg tracking-tight text-on-surface">LeadForge AI</h1>
           </div>
           <p className="font-body-md text-body-md text-on-surface-variant">Accelerate your enterprise intelligence.</p>

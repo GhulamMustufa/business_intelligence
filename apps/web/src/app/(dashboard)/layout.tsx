@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { clearAuthCookie } from "@/app/actions/auth";
 
@@ -31,7 +32,7 @@ export default function DashboardLayout({
       <aside className="w-[240px] flex-shrink-0 bg-surface-container-lowest border-r border-outline-variant/20 flex flex-col z-40 hidden md:flex">
         {/* Brand Header */}
         <div className="h-16 px-gutter flex items-center gap-3">
-          <span className="material-symbols-outlined text-primary font-bold">bubble_chart</span>
+          <Image src="/logo.png" alt="LeadForge AI Logo" width={32} height={32} className="object-contain" />
           <span className="font-display text-[20px] font-extrabold tracking-tight text-white">LeadForge AI</span>
         </div>
         

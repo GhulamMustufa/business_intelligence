@@ -6,8 +6,10 @@ import { Pool } from 'pg';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
-    // If not defined, fallback to the hardcoded env so it runs
-    const connectionString = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_aP81EFWdcRiu@ep-noisy-surf-az8rnbp0-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require';
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL is not defined in the environment variables');
+    }
+    const connectionString = process.env.DATABASE_URL;
     const pool = new Pool({ connectionString });
     const adapter = new PrismaPg(pool);
     super({ adapter });

@@ -1,9 +1,21 @@
 import { fetchCompanies } from '@/lib/api/discovery';
 import DiscoveryLayout from '@/components/discovery/DiscoveryLayout';
 
+import { Suspense } from 'react';
+import DiscoveryLoading from './loading';
+
 export default async function DiscoveryPage({ searchParams }: { searchParams: Promise<Record<string, string | string[]>> }) {
-  // In Next.js 15, searchParams is a Promise
   const params = await searchParams;
+  const searchKey = new URLSearchParams(params as any).toString();
+
+  return (
+    <Suspense key={searchKey} fallback={<DiscoveryLoading />}>
+      <DiscoveryDataFetcher params={params} />
+    </Suspense>
+  );
+}
+
+async function DiscoveryDataFetcher({ params }: { params: Record<string, string | string[]> }) {
   const urlParams = new URLSearchParams();
   
   Object.entries(params).forEach(([key, value]) => {
@@ -13,6 +25,11 @@ export default async function DiscoveryPage({ searchParams }: { searchParams: Pr
       urlParams.append(key, value);
     }
   });
+  
+  // Explicitly ask the backend for up to 100 results so we can paginate them locally
+  if (!urlParams.has('limit')) {
+    urlParams.append('limit', '100');
+  }
 
   let initialCompanies = [];
   let initialTotal = 0;
@@ -32,3 +49,4 @@ export default async function DiscoveryPage({ searchParams }: { searchParams: Pr
     />
   );
 }
+

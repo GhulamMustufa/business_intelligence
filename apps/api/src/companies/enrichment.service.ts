@@ -36,6 +36,7 @@ export class EnrichmentService {
       this.logger.error(`Error fetching Clearbit data for ${name}:`, error);
     }
 
+/*
     try {
       // 2. Google Custom Search for LinkedIn and snippet
       const googleApiKey = this.configService.get<string>('GOOGLE_SEARCH_API_KEY');
@@ -63,6 +64,7 @@ export class EnrichmentService {
     } catch (error) {
       this.logger.error(`Error fetching Google Custom Search data for ${name}:`, error);
     }
+    */
 
     return result;
   }

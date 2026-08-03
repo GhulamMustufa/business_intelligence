@@ -1,0 +1,215 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LeadForge AI | Secure Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdea3",
+                    "on-surface-variant": "#c6c5d5",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "tertiary-fixed-dim": "#f7bd3e",
+                    "surface": "#0b1326",
+                    "surface-container-highest": "#2d3449",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#0d1c2d",
+                    "tertiary": "#f7bd3e",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "on-secondary-container": "#a7b6cc",
+                    "surface-dim": "#0b1326",
+                    "surface-variant": "#2d3449",
+                    "on-tertiary-container": "#3e2b00",
+                    "on-tertiary": "#402d00",
+                    "inverse-on-surface": "#283044",
+                    "secondary-fixed-dim": "#b9c8de",
+                    "surface-container-lowest": "#060e20",
+                    "surface-tint": "#bdc2ff",
+                    "surface-container-high": "#222a3d",
+                    "surface-container-low": "#131b2e",
+                    "secondary-fixed": "#d4e4fa",
+                    "on-tertiary-fixed": "#261900",
+                    "surface-bright": "#31394d",
+                    "on-primary": "#131e8c",
+                    "on-background": "#dae2fd",
+                    "tertiary-container": "#c08d00",
+                    "outline": "#908f9e",
+                    "on-primary-fixed-variant": "#2f3aa3",
+                    "on-primary-fixed": "#000767",
+                    "surface-container": "#171f33",
+                    "primary": "#818cf8",
+                    "on-secondary-fixed-variant": "#39485a",
+                    "inverse-surface": "#dae2fd",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#4953bc",
+                    "primary-container": "#818cf8",
+                    "background": "#0b1326",
+                    "on-error": "#690005",
+                    "secondary-container": "#39485a",
+                    "on-primary-container": "#101b8a",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#b9c8de",
+                    "on-surface": "#dae2fd",
+                    "on-secondary": "#233143",
+                    "outline-variant": "#454653",
+                    "primary-fixed": "#e0e0ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-desktop": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "display": ["Geist"],
+                    "body-md": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: #171f33;
+            border: 1px solid #454653;
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.4);
+        }
+        .ai-glow {
+            box-shadow: 0 0 40px -10px rgba(129, 140, 248, 0.1);
+        }
+        .mesh-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            background: radial-gradient(circle at 15% 20%, #171f33 0%, transparent 45%),
+                        radial-gradient(circle at 85% 80%, #0b1326 0%, transparent 45%);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-8">
+<!-- Atmospheric Background Shader -->
+<div class="mesh-bg"></div>
+<!-- Main Content Container -->
+<main class="w-full max-w-[440px] relative z-10">
+<!-- Header / Logo -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[36px]">bubble_chart</span>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-on-surface">LeadForge AI</h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Accelerate your enterprise intelligence.</p>
+</div>
+<!-- Login Card -->
+<div class="glass-card ai-glow rounded-xl p-10 flex flex-col gap-8">
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-md text-headline-md text-on-surface">Welcome back</h2>
+<p class="font-body-md text-body-md text-outline">Please enter your details to sign in.</p>
+</div>
+<!-- Social Login -->
+<button class="w-full h-12 flex items-center justify-center gap-3 bg-surface-container-high hover:bg-surface-container-highest transition-all border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface group">
+<svg class="group-hover:scale-110 transition-transform" height="18" viewBox="0 0 18 18" width="18">
+<path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"></path>
+<path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"></path>
+<path d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"></path>
+<path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.443 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z" fill="#EA4335"></path>
+</svg>
+                Sign in with Google
+            </button>
+<div class="flex items-center gap-4">
+<div class="h-px bg-outline-variant flex-1 opacity-50"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">or continue with email</span>
+<div class="h-px bg-outline-variant flex-1 opacity-50"></div>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Email Address</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-outline/50" placeholder="name@company.com" type="email">
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Password</label>
+<a class="font-body-md text-body-md text-primary hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+</div>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 font-body-md text-on-surface focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all placeholder:text-outline/50" placeholder="••••••••" type="password">
+</div>
+<button class="w-full h-12 mt-2 bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm rounded-lg transition-all active:scale-[0.98] duration-150 flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                    SIGN IN TO FORGE
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+</div>
+<!-- Footer Actions -->
+<p class="text-center mt-10 font-body-md text-body-md text-outline">
+            Don't have an account? 
+            <a class="text-primary font-semibold hover:text-primary-container transition-colors" href="#">Sign up for a free trial</a>
+</p>
+<!-- Dynamic Micro-interactions script -->
+<script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const inputs = document.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        input.parentElement.querySelector('label').classList.add('text-primary');
+                        input.parentElement.querySelector('label').classList.remove('text-on-surface-variant');
+                    });
+                    input.addEventListener('blur', () => {
+                        input.parentElement.querySelector('label').classList.remove('text-primary');
+                        input.parentElement.querySelector('label').classList.add('text-on-surface-variant');
+                    });
+                });
+            });
+        </script>
+</main>
+<!-- Decorative Illustration (Bento Style Floating Detail) -->
+<div class="hidden lg:block absolute right-16 top-1/2 -translate-y-1/2 w-72 h-auto overflow-hidden pointer-events-none">
+<div class="glass-card w-full rounded-xl p-6 border-outline-variant/30 flex flex-col gap-6 opacity-30">
+<div class="aspect-video rounded bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover grayscale" data-alt="A macro close-up of a high-tech microprocessor with glowing indigo circuits and floating data particles, emphasizing a dark, premium enterprise AI aesthetic with sharp focus and cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADUsPISaiQ8KZpONb0CFQNLWdl4MAZ7rccBpsXTXKNhL01IbuyvFIoq0a4YdajL3qzVQ2Usfn0pHeGNXqk2F-a1bGbBvKDEi7-wIXExBIfxdzWLmfiCvaIPf_aZauedG4MHVHQmg9rTP1tNXhfmw9EG8In481ZYCqZcjfsWwaYo07TvV6opUGJWfFTcxNCWYrA7SZd23DklJF1kCwl5b395Z6yTcXudCjuf0a4ShpfObcUTwCBJ1mVBg">
+</div>
+<div class="flex flex-col gap-3">
+<div class="h-2 w-3/4 bg-primary/20 rounded"></div>
+<div class="h-2 w-1/2 bg-outline/30 rounded"></div>
+<div class="h-2 w-2/3 bg-outline/30 rounded"></div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="h-10 w-10 rounded-full bg-primary/10"></div>
+<div class="h-4 w-20 bg-outline/30 rounded"></div>
+</div>
+</div>
+</div>
+</body></html>

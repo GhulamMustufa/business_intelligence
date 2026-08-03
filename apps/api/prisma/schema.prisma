@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Organization {
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  users User[]
+}
+
+model User {
+  id             String    @id @default(uuid())
+  email          String    @unique
+  password       String?
+  clerkId        String?   @unique
+  firstName      String?
+  lastName       String?
+  organizationId String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  organization   Organization      @relation(fields: [organizationId], references: [id])
+  savedSearches  SavedSearch[]
+  savedLeads     SavedLead[]
+  leadFolders    LeadFolder[]
+  outreachDrafts OutreachDraft[]
+  subscription   UserSubscription?
+}
+
+model Company {
+  id              String  @id @default(uuid())
+  name            String
+  industry        String
+  location        String
+  employeeSizeMin Int
+  employeeSizeMax Int
+  website         String
+  phone           String?
+  linkedInUrl     String?
+  logoUrl         String?
+  baseScore       Int
+  matchLabel      String?
+  annualRevenue   String?
+  marketShare     String?
+  headcount       String?
+  confidence      Int?
+  recentActivity  String?
+  googleRating    Float?
+  websiteQuality  String?
+  socialPresence  String?
+  services        Json?
+
+  insights       AIInsight?
+  savedBy        SavedLead[]
+  techStack      TechStack[]
+  decisionMakers DecisionMaker[]
+  news           CompanyNews[]
+  notes          InternalNote[]
+  scoreMetrics   CompanyScore?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AIInsight {
+  id                 String  @id @default(uuid())
+  companyId          String  @unique
+  whyMatch           String  @db.Text
+  buyingSignals      Json
+  outreachStrategy   String  @db.Text
+  criticalPainPoints Json?
+  companyMaturity    String?
+  digitalWeaknesses  Json?
+
+  growthScore              Int?
+  aiReadiness              String?
+  likelihoodToNeedServices String?
+  suggestedSalesAngle      String? @db.Text
+  recommendedOutreach      String? @db.Text
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model TechStack {
+  id        String @id @default(uuid())
+  companyId String
+  name      String
+  status    String
+  icon      String
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model DecisionMaker {
+  id        String  @id @default(uuid())
+  companyId String
+  name      String
+  title     String
+  photoUrl  String?
+
+  emailDomain     String?
+  department      String?
+  emailStatus     String?
+  confidenceScore Float?
+
+  aiPriorityMatch   String?  @db.Text
+  matchTags         String[]
+  suggestedOutreach Json?
+
+  company        Company         @relation(fields: [companyId], references: [id])
+  savedBy        SavedLead[]
+  outreachDrafts OutreachDraft[]
+}
+
+model CompanyNews {
+  id        String @id @default(uuid())
+  companyId String
+  title     String
+  summary   String
+  dateLabel String
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model InternalNote {
+  id         String   @id @default(uuid())
+  companyId  String
+  authorId   String
+  authorName String
+  content    String
+  createdAt  DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model CompanyScore {
+  id                 String @id @default(uuid())
+  companyId          String @unique
+  fitScore           String
+  intentSignal       String
+  technographicMatch String
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model SavedLead {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  companyId String?
+  company   Company? @relation(fields: [companyId], references: [id])
+
+  decisionMakerId String?
+  decisionMaker   DecisionMaker? @relation(fields: [decisionMakerId], references: [id])
+
+  tags     String[]
+  folderId String?
+  folder   LeadFolder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, decisionMakerId, companyId])
+}
+
+model LeadFolder {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  name   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  savedLeads SavedLead[]
+
+  @@unique([userId, name])
+}
+
+model OutreachDraft {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  decisionMakerId String
+  decisionMaker   DecisionMaker @relation(fields: [decisionMakerId], references: [id])
+
+  subject  String
+  body     String @db.Text
+  tone     String @default("Professional")
+  versions Json? // Array of previous draft versions for history
+
+  bestAngle         String? @db.Text
+  suggestedFollowUp String? @db.Text
+  thingsToMention   Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, decisionMakerId])
+}
+
+model UserSubscription {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  planName      String    @default("Free")
+  creditsUsed   Int       @default(0)
+  creditsTotal  Int       @default(100)
+  renewsAt      DateTime?
+  paymentMethod String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SavedSearch {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  query     Json
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

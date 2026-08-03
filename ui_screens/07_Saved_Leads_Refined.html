@@ -1,0 +1,464 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Saved Leads | LeadForge AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px 2px rgba(189, 194, 255, 0.08);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #454653;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #767586;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary": "#402d00",
+                        "on-secondary-container": "#a7b6cc",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface-variant": "#c6c5d5",
+                        "on-tertiary-container": "#3e2b00",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-fixed": "#d4e4fa",
+                        "outline-variant": "#454653",
+                        "secondary": "#b9c8de",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdea3",
+                        "primary-fixed": "#e0e0ff",
+                        "on-primary-container": "#101b8a",
+                        "on-secondary": "#233143",
+                        "surface-container-high": "#222a3d",
+                        "primary": "#bdc2ff",
+                        "on-primary-fixed-variant": "#2f3aa3",
+                        "surface": "#0b1326",
+                        "tertiary": "#f7bd3e",
+                        "surface-tint": "#bdc2ff",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "outline": "#908f9e",
+                        "inverse-primary": "#4953bc",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "background": "#0b1326",
+                        "on-primary": "#131e8c",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#000767",
+                        "tertiary-container": "#c08d00",
+                        "on-error": "#690005",
+                        "secondary-container": "#39485a",
+                        "inverse-on-surface": "#283044",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed-dim": "#f7bd3e",
+                        "primary-container": "#818cf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "display": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<aside class="w-60 h-screen fixed left-0 top-0 bg-surface-container border-r border-outline-variant flex flex-col z-50">
+<div class="p-6 flex flex-col gap-1">
+<h1 class="font-headline-md text-primary-container leading-tight">LeadForge AI</h1>
+<p class="font-label-sm text-on-surface-variant opacity-70">Enterprise Tier</p>
+</div>
+<nav class="flex-1 px-3 mt-4 flex flex-col gap-1">
+<div class="flex items-center gap-4 px-4 py-3 rounded-lg transition-all text-on-surface-variant hover:bg-surface-container-high cursor-pointer">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-body-md">Discovery</span>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">Intelligence</span>
+</div>
+<!-- ACTIVE TAB -->
+<div class="flex items-center gap-4 px-4 py-3 rounded-lg transition-all bg-primary-container text-on-primary-container font-semibold cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-body-md">Prospects</span>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</div>
+</nav>
+<div class="p-6 border-t border-outline-variant">
+<button class="w-full py-2.5 px-4 bg-primary-container text-on-primary-container font-label-sm rounded-xl hover:opacity-90 transition-opacity active:scale-[0.98]">
+            New Campaign
+        </button>
+<div class="mt-6 flex flex-col gap-1">
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-sm">Support</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm">Documentation</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="h-16 fixed top-0 right-0 left-60 z-40 bg-surface border-b border-outline-variant flex items-center justify-between px-8">
+<div class="flex items-center gap-4 w-1/2">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-50">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Search prospects, insights, or commands (⌘K)" type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors">help_outline</button>
+</div>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="w-9 h-9 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a female executive in a dark blazer, soft cinematic lighting, corporate high-end aesthetic, blurred office background with subtle blue tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb9yzGJit53Dig2olFbXL_n0HyBxkouy3fVYN85LAdMxGVjyoahgzV2s6zUcbaCL5Gjxz_nXLgtzK2CdaLiUeUPcgfXXwfioqGr3JA0EZlkHUvUqM8gcPsaTI9EUWwdVQoNu3vXl28Ebt6qlJUDzskdMZm3hVn2Qg9tasNnkZrBqAUc1B8h2OvcBGVFbiv3sQtbS2v515lI9_4RtPFawADU2sJjQ0sIhMomLJh2zrms9vsXe-UgZf-kA">
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold group-hover:text-primary-container transition-colors">Sarah Jenkins</span>
+<span class="text-[10px] font-label-sm opacity-60 uppercase tracking-wider">ADMIN</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="ml-60 pt-16 h-screen flex">
+<!-- Sub-Sidebar -->
+<aside class="w-64 border-r border-outline-variant flex flex-col p-6 gap-8 bg-surface-container-low/30 overflow-y-auto">
+<section>
+<h3 class="font-label-sm text-on-surface-variant/60 mb-3 uppercase tracking-widest">BROWSE</h3>
+<div class="flex flex-col gap-1">
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg bg-primary-container/10 text-primary-container font-semibold">
+<span class="material-symbols-outlined text-[20px]">all_inbox</span>
+<span class="text-sm">All Leads</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-sm">Recently Added</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="text-sm">Trash</span>
+</button>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-label-sm text-on-surface-variant/60 uppercase tracking-widest">FOLDERS</h3>
+<button class="material-symbols-outlined text-sm opacity-40 hover:opacity-100">add</button>
+</div>
+<div class="flex flex-col gap-1">
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-tertiary">folder</span>
+<span class="text-sm truncate">Q4 Tech Campaign</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-tertiary">folder</span>
+<span class="text-sm truncate">Mid-Market SaaS</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-tertiary">folder</span>
+<span class="text-sm truncate">EMEA Expansion</span>
+</button>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-label-sm text-on-surface-variant/60 uppercase tracking-widest">TAGS</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-[10px] font-label-sm rounded-full border border-green-500/20 cursor-pointer hover:bg-green-500/20">HIGH INTENT</span>
+<span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-label-sm rounded-full border border-blue-500/20 cursor-pointer hover:bg-blue-500/20">DECISION MAKER</span>
+<span class="px-2.5 py-1 bg-orange-500/10 text-orange-400 text-[10px] font-label-sm rounded-full border border-orange-500/20 cursor-pointer hover:bg-orange-500/20">FOLLOW-UP</span>
+</div>
+</section>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col h-full bg-surface overflow-hidden">
+<!-- Context Header -->
+<div class="p-8 border-b border-outline-variant space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-on-surface">Saved Leads</h2>
+<p class="text-sm text-on-surface-variant">Manage and organize <span class="text-primary-container font-bold">2,480</span> high-potential leads across active campaigns.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex border border-outline-variant rounded-xl p-1 bg-surface-container-low">
+<button class="p-1.5 px-3 rounded-lg bg-surface-container-highest shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="p-1.5 px-3 rounded-lg text-on-surface-variant hover:text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">table_rows</span>
+</button>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-xl font-semibold hover:opacity-90 active:scale-[0.98] flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                        Export All
+                    </button>
+</div>
+</div>
+<!-- Filters & Search -->
+<div class="flex items-center gap-4">
+<div class="relative flex-grow group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Filter by name, company, or industry..." type="text">
+</div>
+<div class="flex items-center gap-2 border border-outline-variant bg-surface-container rounded-xl px-4 py-2.5 cursor-pointer hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+<span class="text-sm">Sort: <span class="font-semibold">Date Added</span></span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<button class="border border-outline-variant bg-surface-container rounded-xl p-2.5 hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+<!-- Bulk Action Bar -->
+<div class="bg-primary-container/10 border border-primary-container/30 rounded-xl p-3.5 flex items-center justify-between ai-glow" id="bulk-actions">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<input checked="" class="rounded border-primary-container text-primary-container focus:ring-primary-container bg-surface" type="checkbox">
+<span class="text-sm font-semibold text-primary-container">12 items selected</span>
+</div>
+<div class="w-px h-4 bg-outline-variant"></div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">drive_file_move</span>
+                            Move to Folder
+                        </button>
+<button class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">label</span>
+                            Add Tag
+                        </button>
+<button class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">outgoing_mail</span>
+                            Send Sequence
+                        </button>
+</div>
+</div>
+<button class="text-error font-semibold flex items-center gap-2 hover:bg-error/10 px-3 py-1 rounded-lg transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                    Delete
+                </button>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-grow overflow-y-auto p-8 custom-scrollbar">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Lead Card 1 -->
+<div class="bg-surface-container border border-outline-variant p-6 rounded-2xl hover:border-primary-container transition-all group relative ai-glow">
+<input class="absolute top-4 left-4 rounded border-outline-variant text-primary-container focus:ring-primary-container bg-surface" type="checkbox">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white/5 rounded-xl border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Tech logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSfm5lt0UATA9OmdoBNBdV5enE6YDKox3mQ53JBOXbs8BR1oebNPx_ua8eSYXT5cqBosMszGp3DwOboK2jMEoSzJc5v4xR-WLAGSmpPlf4jVIdya1Kdejp-0d5JiPB-PFyQmUpEs-CLvWmSDPQynlXIwTVW8oHqWYFN_mWtG83px9hV1muzMiyjcvAUWywIo0K_JvlTFN22fLzkFc65x3aYbjfIvr56U2sTHfGxlKC8SZrM4fUxU78ZA">
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-semibold text-body-lg group-hover:text-primary-container transition-colors">Marcus Thorne</h4>
+<p class="text-sm text-on-surface-variant">CTO @ Lumina Labs</p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 text-primary-container">
+<span class="font-label-sm font-bold">98</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-[10px] font-label-sm opacity-50 uppercase tracking-tighter">SCORE</span>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] font-label-sm rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">location_on</span>
+                                    San Francisco, CA
+                                </span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] font-label-sm rounded">SaaS</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant flex items-center justify-between">
+<span class="px-2.5 py-1 bg-green-500/10 text-green-500 text-[10px] font-label-sm rounded-full border border-green-500/20">HIGH INTENT</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-primary-container/10 text-on-surface-variant hover:text-primary-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-primary-container/10 text-on-surface-variant hover:text-primary-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Lead Card 2 -->
+<div class="bg-surface-container border border-outline-variant p-6 rounded-2xl hover:border-primary-container transition-all group relative ai-glow">
+<input checked="" class="absolute top-4 left-4 rounded border-primary-container text-primary-container focus:ring-primary-container bg-surface" type="checkbox">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white/5 rounded-xl border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Tech logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgdTJcgR_e7CLdfpcSq1En1mq_e_ZQGpddQGLSpjfyA-KiytaWBY-YFrJv1x0EXo2SOlr2J_q01KZEWo21j0m3xRa-9g0KX0jep0wD4LkRF4EH46t16WuA0vZGmMyRChVPdNpJeVEb2DQKwcqB_Gbrg54WdZn9ivdYlyVNWZq0IEN_MSGNthgvbFPPO3ARwWmXyAjnq9I3YiRMA7vybnOc2zZGE7k00eUgfC-JKx8eUpBAgNz26_E9fA">
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-semibold text-body-lg group-hover:text-primary-container transition-colors">Elena Rodriguez</h4>
+<p class="text-sm text-on-surface-variant">Head of Sales @ Velocity</p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 text-primary-container">
+<span class="font-label-sm font-bold">84</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-[10px] font-label-sm opacity-50 uppercase tracking-tighter">SCORE</span>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] font-label-sm rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">location_on</span>
+                                    London, UK
+                                </span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] font-label-sm rounded">Fintech</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant flex items-center justify-between">
+<span class="px-2.5 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-label-sm rounded-full border border-blue-500/20">DECISION MAKER</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-primary-container/10 text-on-surface-variant hover:text-primary-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-primary-container/10 text-on-surface-variant hover:text-primary-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Lead Card 3 -->
+<div class="bg-surface-container border border-outline-variant p-6 rounded-2xl hover:border-primary-container transition-all group relative ai-glow">
+<input class="absolute top-4 left-4 rounded border-outline-variant text-primary-container focus:ring-primary-container bg-surface" type="checkbox">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white/5 rounded-xl border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Tech logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3b-2M5StJqPcQ8DShQtKVlTPREMuwRs-CqwftORt5ihQY3UY7cj2637a8DQbz2qcWVfpawayMQBm26SKC7R6ypIcaMJI4Yfqco1dQuKm9hNwsCO43-j8ghX2Swa3hPrAD5hzxQCi15ICkA0825YmIW9jCtCDsyqYhladooAXZeEU6__rbm2eYLQBjjI3UxSpU7HyZnSkOvpLotuLmeJna-H2dg3S8LR3DQL1fLxsFu_On52iEgW5IhQ">
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-semibold text-body-lg group-hover:text-primary-container transition-colors">David Chen</h4>
+<p class="text-sm text-on-surface-variant">VP Growth @ Ardent Energy</p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-sm font-bold">42</span>
+<span class="material-symbols-outlined text-[14px]">star</span>
+</div>
+<span class="text-[10px] font-label-sm opacity-50 uppercase tracking-tighter">SCORE</span>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] font-label-sm rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">location_on</span>
+                                    Austin, TX
+                                </span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-[10px] font-label-sm rounded">Cleantech</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant flex items-center justify-between">
+<span class="px-2.5 py-1 bg-orange-500/10 text-orange-500 text-[10px] font-label-sm rounded-full border border-orange-500/20">FOLLOW-UP</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-primary-container/10 text-on-surface-variant hover:text-primary-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-primary-container/10 text-on-surface-variant hover:text-primary-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex flex-col items-center gap-4">
+<button class="bg-surface-container-highest hover:bg-surface-container-high text-on-surface px-12 py-3 rounded-full font-semibold transition-all border border-outline-variant active:scale-[0.98]">
+                    Load 50 More
+                </button>
+<p class="text-[10px] font-label-sm text-on-surface-variant/50 uppercase tracking-widest">SHOWING 12 OF 2,480 LEADS</p>
+</div>
+</div>
+</div>
+</main>
+<!-- AI Command Bar -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-surface-container-highest border border-primary-container/30 rounded-full px-5 py-2.5 ai-glow transition-all hover:scale-[1.02] cursor-pointer group backdrop-blur-xl">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-sm font-semibold text-on-surface">Ask LeadForge AI to find more leads like these...</span>
+<div class="flex items-center gap-1 ml-4 bg-white/10 px-2.5 py-1 rounded-lg text-[10px] font-label-sm text-white/60">
+<span>⌘</span><span>K</span>
+</div>
+</div>
+<script>
+    // Visual interaction for demo
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const bulkBar = document.getElementById('bulk-actions');
+    
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const countLabel = bulkBar.querySelector('span.font-semibold');
+            if(countLabel) countLabel.innerText = `${checkedCount} items selected`;
+        });
+    });
+</script>
+</body></html>

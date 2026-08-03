@@ -1,0 +1,511 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LeadForge AI - Settings Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #454653;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary": "#402d00",
+                        "on-secondary-container": "#a7b6cc",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface-variant": "#c6c5d5",
+                        "on-tertiary-container": "#3e2b00",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-fixed": "#d4e4fa",
+                        "outline-variant": "#454653",
+                        "secondary": "#b9c8de",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdea3",
+                        "primary-fixed": "#e0e0ff",
+                        "on-primary-container": "#101b8a",
+                        "on-secondary": "#233143",
+                        "surface-container-high": "#222a3d",
+                        "primary": "#bdc2ff",
+                        "on-primary-fixed-variant": "#2f3aa3",
+                        "surface": "#0b1326",
+                        "tertiary": "#f7bd3e",
+                        "surface-tint": "#bdc2ff",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "outline": "#908f9e",
+                        "inverse-primary": "#4953bc",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "background": "#0b1326",
+                        "on-primary": "#131e8c",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#000767",
+                        "tertiary-container": "#c08d00",
+                        "on-error": "#690005",
+                        "secondary-container": "#39485a",
+                        "inverse-on-surface": "#283044",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed-dim": "#f7bd3e",
+                        "primary-container": "#818cf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "display": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container/30">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 bottom-0 z-40 w-[240px] flex flex-col bg-surface border-r border-outline-variant">
+<div class="p-8 mb-4">
+<h1 class="font-headline-md text-primary-container">LeadForge AI</h1>
+<p class="text-on-surface-variant font-label-sm opacity-70">Enterprise Intelligence</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-body-md">Discovery</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-body-md">Intelligence</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-body-md">Prospects</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container/10 text-primary-container rounded-lg transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="p-6 border-t border-outline-variant">
+<div class="flex items-center gap-4 p-2 rounded-xl hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="text-on-primary-container text-xs font-bold">JD</span>
+</div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">John Doe</p>
+<p class="text-[10px] text-on-surface-variant truncate">Admin Account</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 right-0 left-[240px] z-30 h-16 bg-surface border-b border-outline-variant flex justify-between items-center px-8">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary-container focus:border-primary-container transition-all placeholder:text-on-surface-variant/50" placeholder="Search settings..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-all" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-all" data-icon="help">help</button>
+<div class="w-px h-6 bg-outline-variant mx-2"></div>
+<div class="px-4 py-1.5 bg-primary-container/10 rounded-xl border border-primary-container/20">
+<span class="text-[10px] font-label-sm text-primary-container uppercase tracking-wider">ENTERPRISE</span>
+</div>
+<div class="w-9 h-9 rounded-full border border-outline-variant overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASD2v8qC9PvmHDDkebVun1T3r-6vN-6eBfk7zxxFgzU0-_Q5FfkDpM6Ody-TnjQ03h_UglCXuaNGVK_1DhXz5Jw-HM_TcQJAuXOJSjKA3YYSDh28SZ2i79ly5uPtc6p1uTktwWkFO8TGggDHmM6apxDcFNo9tRQwcQmSD6yiOIhbmh5l7XZxIkR7eY-17x3TMiVymNxG0_5ZrwCkzb9nMYEzhwhyXIhbeT4uEdtkaKS17JEqfzhdSdhA">
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[240px] mt-16 p-8 min-h-[calc(100vh-64px)] bg-background overflow-y-auto">
+<div class="max-w-[1200px] mx-auto">
+<header class="mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Settings Hub</h2>
+<p class="text-on-surface-variant mt-1 text-sm">Manage your professional account, workspace configurations, and AI intelligence parameters.</p>
+</header>
+<div class="flex gap-8 items-start">
+<!-- Settings Tabs Sidebar -->
+<nav class="w-64 flex flex-col gap-1 sticky top-24">
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-primary-container bg-primary-container/10 font-medium border border-primary-container/20" id="tab-profile" onclick="switchTab('profile')">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-md">Profile</span>
+</button>
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" id="tab-workspace" onclick="switchTab('workspace')">
+<span class="material-symbols-outlined" data-icon="business">business</span>
+<span class="font-body-md">Workspace</span>
+</button>
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" id="tab-billing" onclick="switchTab('billing')">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-body-md">Billing &amp; Credits</span>
+</button>
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" id="tab-api" onclick="switchTab('api')">
+<span class="material-symbols-outlined" data-icon="key">key</span>
+<span class="font-body-md">API Keys</span>
+</button>
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" id="tab-preferences" onclick="switchTab('preferences')">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="font-body-md">Preferences</span>
+</button>
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" id="tab-theme" onclick="switchTab('theme')">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="font-body-md">Theme</span>
+</button>
+<button class="tab-btn flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" id="tab-security" onclick="switchTab('security')">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-body-md">Security</span>
+</button>
+</nav>
+<!-- Settings Content Panels -->
+<div class="flex-1 space-y-6">
+<!-- Profile Section (Active) -->
+<section class="settings-panel block animate-in fade-in slide-in-from-bottom-2 duration-300" id="content-profile">
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<h3 class="font-headline-md text-xl mb-8">Profile Details</h3>
+<div class="flex items-start gap-12 mb-10">
+<div class="relative group">
+<div class="w-24 h-24 rounded-2xl border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDY1408Wey7tScDQDNQFBMM-u94YGGzCwv9UBVuZZ3H38ycS-_kLdZ4XzJ0B4Vlvxcm9Q4foA2lecq7qNgjvS0YDZhbWdsk8hb4i5vfD_wJYyuLU-Y74jvRiZC06TQMDZp5ZE9UpM0GYPsDqWeGmGljy7C0OyKuxBtvt0zhityxVTQ8p1NJlWHdI4G_p1MDBH7WJUoa8N-vHE9Ua_6Abxab9Fs_XY1pFcp57CN0aA2JjRIyDdE8OyAoA">
+</div>
+<button class="absolute -bottom-2 -right-2 p-2 bg-primary-container text-on-primary-container rounded-lg shadow-xl border border-surface hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex-1 space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Full Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl focus:ring-1 focus:ring-primary-container focus:border-primary-container outline-none text-body-md transition-all" type="text" value="Johnathan Doe">
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Job Title</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl focus:ring-1 focus:ring-primary-container focus:border-primary-container outline-none text-body-md transition-all" type="text" value="VP of Revenue Ops">
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Work Email</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl focus:ring-1 focus:ring-primary-container focus:border-primary-container outline-none text-body-md transition-all" type="email" value="j.doe@leadforge.ai">
+</div>
+</div>
+</div>
+<hr class="border-outline-variant mb-10">
+<h4 class="font-headline-md text-lg mb-6">Password Security</h4>
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Current Password</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl outline-none text-body-md transition-all" placeholder="••••••••••••" type="password">
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">New Password</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl outline-none text-body-md transition-all" placeholder="••••••••••••" type="password">
+</div>
+</div>
+<button class="px-8 py-3 bg-primary-container text-on-primary-container font-label-sm rounded-xl hover:opacity-90 transition-opacity active:scale-[0.98]">Update Credentials</button>
+</div>
+</div>
+</section>
+<!-- Workspace Section -->
+<section class="settings-panel hidden" id="content-workspace">
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl space-y-10">
+<div>
+<h3 class="font-headline-md text-xl mb-6">Workspace Management</h3>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Workspace Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl outline-none" type="text" value="LeadForge Global Operations">
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Primary Domain</label>
+<input class="w-full bg-surface-container-low border border-outline-variant p-3 rounded-xl outline-none opacity-50 cursor-not-allowed" disabled="" type="text" value="leadforge.ai">
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-lg">Team Members</h4>
+<button class="text-primary-container font-label-sm flex items-center gap-2 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+                                        Invite Member
+                                    </button>
+</div>
+<div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-low">
+<table class="w-full text-left text-sm border-collapse">
+<thead class="bg-surface-container-high/50 border-b border-outline-variant">
+<tr>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Name</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Role</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Status</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px] text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="p-4 font-medium">Sarah Jenkins</td>
+<td class="p-4">Owner</td>
+<td class="p-4 text-primary-container text-xs flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-primary-container rounded-full animate-pulse"></span> Active</td>
+<td class="p-4 text-right"><button class="text-on-surface-variant hover:text-on-surface">Manage</button></td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="p-4 font-medium">Michael Chen</td>
+<td class="p-4">Editor</td>
+<td class="p-4 text-primary-container text-xs flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-primary-container rounded-full animate-pulse"></span> Active</td>
+<td class="p-4 text-right"><button class="text-on-surface-variant hover:text-on-surface">Manage</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- Billing & Credits -->
+<section class="settings-panel hidden" id="content-billing">
+<div class="grid grid-cols-3 gap-6 mb-6">
+<div class="bg-surface-container border border-outline-variant p-6 rounded-2xl flex flex-col justify-between">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Current Plan</label>
+<div class="mt-4">
+<h4 class="font-headline-md text-2xl text-primary-container">Enterprise</h4>
+<p class="text-xs text-on-surface-variant mt-1">Renews on Oct 12, 2024</p>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-6 rounded-2xl col-span-2">
+<div class="flex justify-between items-center mb-4">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Intelligence Credits</label>
+<span class="font-label-sm">14,200 / 25,000 used</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container transition-all duration-1000" style="width: 56.8%"></div>
+</div>
+<p class="mt-4 text-xs text-on-surface-variant">Your credits reset in 14 days. <a class="text-primary-container underline" href="#">Purchase more.</a></p>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<h4 class="font-headline-md text-lg mb-6">Payment Methods</h4>
+<div class="flex items-center justify-between border border-outline-variant p-5 rounded-xl mb-6 bg-surface-container-low">
+<div class="flex items-center gap-4">
+<div class="w-12 h-8 bg-surface-container-highest rounded-lg flex items-center justify-center font-bold text-[10px]">VISA</div>
+<div>
+<p class="font-bold text-sm">Visa ending in 4429</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Expires 09/2026</p>
+</div>
+</div>
+<div class="px-3 py-1 bg-primary-container/10 text-primary-container text-[10px] rounded-lg font-bold uppercase tracking-wider">DEFAULT</div>
+</div>
+<button class="w-full py-3 border border-outline-variant border-dashed rounded-xl font-label-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors">+ Add Payment Method</button>
+</div>
+</section>
+<!-- API Keys -->
+<section class="settings-panel hidden" id="content-api">
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-xl">API Credentials</h3>
+<button class="px-6 py-2.5 bg-primary-container text-on-primary-container font-label-sm rounded-xl active:scale-[0.98] transition-all">Generate New Key</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-5 border border-outline-variant rounded-xl bg-surface-container-low group hover:border-primary-container/30 transition-colors">
+<div>
+<p class="font-bold text-sm">Production_Web_Main</p>
+<code class="text-xs text-primary-container font-label-sm opacity-80 mt-1 block">pk_live_51Mv3LgHh...k0Xf</code>
+</div>
+<div class="flex gap-3">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface" data-icon="content_copy">content_copy</button>
+<button class="material-symbols-outlined text-error/70 hover:text-error" data-icon="delete">delete</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-5 border border-outline-variant rounded-xl bg-surface-container-low group hover:border-primary-container/30 transition-colors">
+<div>
+<p class="font-bold text-sm">Staging_Sandbox</p>
+<code class="text-xs text-primary-container font-label-sm opacity-80 mt-1 block">pk_test_92J82kLa...m1Zp</code>
+</div>
+<div class="flex gap-3">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface" data-icon="content_copy">content_copy</button>
+<button class="material-symbols-outlined text-error/70 hover:text-error" data-icon="delete">delete</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Theme Section -->
+<section class="settings-panel hidden" id="content-theme">
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<h3 class="font-headline-md text-xl mb-8">Appearance</h3>
+<div class="space-y-10">
+<div>
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px] mb-4 block">Display Mode</label>
+<div class="grid grid-cols-2 gap-6">
+<button class="p-6 border-2 border-primary-container bg-surface-container-low rounded-2xl text-left relative overflow-hidden group">
+<div class="w-full h-24 bg-background border border-outline-variant rounded-lg mb-4 overflow-hidden p-2 space-y-1">
+<div class="w-1/2 h-1 bg-primary-container/20 rounded"></div>
+<div class="w-1/3 h-1 bg-outline-variant/30 rounded"></div>
+</div>
+<p class="font-bold text-sm">Dark Slate</p>
+<p class="text-xs text-on-surface-variant mt-1">Easier on the eyes in low light.</p>
+<div class="absolute top-2 right-2 text-primary-container material-symbols-outlined text-base">check_circle</div>
+</button>
+<button class="p-6 border-2 border-transparent bg-surface-container-high rounded-2xl text-left hover:border-outline-variant transition-all">
+<div class="w-full h-24 bg-white border border-slate-200 rounded-lg mb-4 p-2 space-y-1">
+<div class="w-1/2 h-1 bg-slate-200 rounded"></div>
+<div class="w-1/3 h-1 bg-slate-100 rounded"></div>
+</div>
+<p class="font-bold text-sm text-on-background">Light Professional</p>
+<p class="text-xs text-on-surface-variant mt-1">Classic professional high-contrast.</p>
+</button>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px] mb-4 block">Accent Color</label>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-[#818cf8] border-2 border-white ring-4 ring-[#818cf8]/20 cursor-pointer transition-transform hover:scale-110"></div>
+<div class="w-10 h-10 rounded-full bg-emerald-500 border border-outline-variant/20 cursor-pointer transition-transform hover:scale-110"></div>
+<div class="w-10 h-10 rounded-full bg-rose-500 border border-outline-variant/20 cursor-pointer transition-transform hover:scale-110"></div>
+<div class="w-10 h-10 rounded-full bg-amber-500 border border-outline-variant/20 cursor-pointer transition-transform hover:scale-110"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Section -->
+<section class="settings-panel hidden" id="content-security">
+<div class="space-y-6">
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<h3 class="font-headline-md text-xl mb-6">Security Overview</h3>
+<div class="flex items-center justify-between p-6 border border-primary-container/20 rounded-xl bg-primary-container/5">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="verified_user">verified_user</span>
+<div>
+<p class="font-bold">Two-Factor Authentication (2FA)</p>
+<p class="text-sm text-on-surface-variant mt-1">Secured via Authenticator App</p>
+</div>
+</div>
+<button class="text-on-surface font-label-sm border border-outline-variant px-6 py-2 rounded-xl hover:bg-surface-container-high transition-all">Manage</button>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<h4 class="font-headline-md text-lg mb-6">Active Sessions</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant last:border-0 last:pb-0">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="laptop_mac">laptop_mac</span>
+<div>
+<p class="font-bold text-sm">MacBook Pro - San Francisco, US</p>
+<p class="text-[10px] text-on-surface-variant mt-0.5">Chrome • Last active 2m ago</p>
+</div>
+</div>
+<span class="text-[10px] font-label-sm text-primary-container bg-primary-container/10 px-3 py-1 rounded-lg uppercase tracking-wider">Current Device</span>
+</div>
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant last:border-0 last:pb-0">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="smartphone">smartphone</span>
+<div>
+<p class="font-bold text-sm">iPhone 15 - San Francisco, US</p>
+<p class="text-[10px] text-on-surface-variant mt-0.5">LeadForge App • Last active 4h ago</p>
+</div>
+</div>
+<button class="text-error/80 text-xs font-bold hover:underline">Revoke</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-lg">Security Audit Log</h4>
+<button class="text-primary-container text-xs font-label-sm uppercase tracking-wider hover:underline">Export Logs</button>
+</div>
+<div class="font-label-sm text-[11px] space-y-2 opacity-80 leading-relaxed">
+<p><span class="text-outline-variant mr-3">[2024-05-12 14:32:01]</span> Login successful via OAuth2 (Google)</p>
+<p><span class="text-outline-variant mr-3">[2024-05-12 10:15:22]</span> API Key: Production_Web_Main created</p>
+<p><span class="text-outline-variant mr-3">[2024-05-11 18:02:45]</span> Profile password updated</p>
+<p><span class="text-outline-variant mr-3">[2024-05-11 18:00:12]</span> 2FA verification challenge completed</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<script>
+        function switchTab(tabId) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('text-primary-container', 'bg-primary-container/10', 'font-medium', 'border', 'border-primary-container/20');
+                btn.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+            });
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('text-primary-container', 'bg-primary-container/10', 'font-medium', 'border', 'border-primary-container/20');
+            activeBtn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+
+            // Update content
+            document.querySelectorAll('.settings-panel').forEach(panel => {
+                panel.classList.add('hidden');
+                panel.classList.remove('block');
+            });
+            const activePanel = document.getElementById('content-' + tabId);
+            activePanel.classList.remove('hidden');
+            activePanel.classList.add('block', 'animate-in', 'fade-in', 'slide-in-from-bottom-2', 'duration-300');
+        }
+
+        // Add micro-interactions for focus states
+        document.querySelectorAll('.settings-panel input').forEach(input => {
+            input.addEventListener('focus', () => {
+                const label = input.parentElement.querySelector('label');
+                if(label) label.classList.add('text-primary-container');
+            });
+            input.addEventListener('blur', () => {
+                const label = input.parentElement.querySelector('label');
+                if(label) label.classList.remove('text-primary-container');
+            });
+        });
+
+        console.log("LeadForge AI: Professional Enterprise Slate Settings Applied.");
+    </script>
+</body></html>

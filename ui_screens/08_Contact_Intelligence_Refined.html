@@ -1,0 +1,408 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Contact Intelligence | LeadForge AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #454653;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #767586;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(11, 19, 38, 0.8);
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(129, 140, 248, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary": "#402d00",
+                        "on-secondary-container": "#a7b6cc",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface-variant": "#c6c5d5",
+                        "on-tertiary-container": "#3e2b00",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-fixed": "#d4e4fa",
+                        "outline-variant": "#454653",
+                        "secondary": "#b9c8de",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdea3",
+                        "primary-fixed": "#e0e0ff",
+                        "on-primary-container": "#101b8a",
+                        "on-secondary": "#233143",
+                        "surface-container-high": "#222a3d",
+                        "primary": "#818cf8",
+                        "on-primary-fixed-variant": "#2f3aa3",
+                        "surface": "#0b1326",
+                        "tertiary": "#f7bd3e",
+                        "surface-tint": "#bdc2ff",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "outline": "#908f9e",
+                        "inverse-primary": "#4953bc",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "background": "#0b1326",
+                        "on-primary": "#131e8c",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#000767",
+                        "tertiary-container": "#c08d00",
+                        "on-error": "#690005",
+                        "secondary-container": "#39485a",
+                        "inverse-on-surface": "#283044",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed-dim": "#f7bd3e",
+                        "primary-container": "#818cf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "display": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["JetBrains Mono"],
+                        "label-caps": ["Geist"],
+                        "code": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "display-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[240px] border-r border-outline-variant/30 flex flex-col py-lg px-md bg-surface-container z-50">
+<div class="mb-xl px-2">
+<h1 class="font-headline-md text-primary-container">LeadForge AI</h1>
+<p class="font-label-sm text-on-surface-variant opacity-70 mt-1 uppercase">Enterprise Tier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span>Discovery</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="psychology">psychology</span>
+<span>Intelligence</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Prospects</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-2.5 px-4 bg-primary-container text-on-primary-container font-label-sm rounded-xl hover:opacity-90 transition-all active:scale-[0.98]">Upgrade Plan</button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-[240px] h-16 flex items-center justify-between px-8 glass-panel border-b border-outline-variant/30 z-40">
+<div class="flex items-center flex-1 max-w-md">
+<div class="relative w-full group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 text-body-sm px-10 py-2 rounded-xl focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Search across lead database..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-label-sm text-primary border border-primary/30 px-4 py-1.5 rounded-xl hover:bg-primary/10 transition-colors">Add Credits</button>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-9 h-9 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution corporate headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHpNgluUfT38ISbkWYebdXKpEL1nI27sGAl9Qrprup2es1Ie0WSFNtGCFLL2B1-rgO3WBs7bqDF8Hh_hrUM0kLvX-wvUXuuZ9NbmgdKmMKV_yA6pT1qjzNJXzPj2wUWuK8fwIc1dyDw7K70Lo__eGnJtmlISQ9UH3TbKun-rohqmDoww51m3ZNIBGRgFAbB2wikt05OMRo7gqC71Xx0GBHygaGjCWvwGOi3_VFxvzi_xBFplhv_Q5GtQ">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="fixed inset-0 left-[240px] top-16 flex overflow-hidden bg-background">
+<!-- Table Section -->
+<section class="flex-1 flex flex-col overflow-hidden">
+<!-- Table Header -->
+<div class="px-8 py-6 flex items-center justify-between border-b border-outline-variant/10">
+<div>
+<h2 class="font-headline-md text-on-surface">Contact Intelligence</h2>
+<p class="text-body-sm text-on-surface-variant opacity-70">Analyze and engage high-propensity targets from your prospect pool.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-container border border-outline-variant/30 rounded-xl px-4 py-2 cursor-pointer hover:border-primary transition-all">
+<span class="material-symbols-outlined text-[20px] mr-2" data-icon="filter_list">filter_list</span>
+<span class="font-label-sm">Filters</span>
+</div>
+<button class="bg-primary hover:opacity-90 text-on-primary-container font-label-sm px-5 py-2.5 flex items-center gap-2 rounded-xl transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="file_download">file_download</span>
+                    Bulk Export
+                </button>
+</div>
+</div>
+<!-- Table Body -->
+<div class="flex-1 overflow-auto custom-scrollbar">
+<table class="w-full border-collapse text-left">
+<thead class="sticky top-0 bg-background z-10">
+<tr class="border-b border-outline-variant/20 bg-surface-container/30">
+<th class="py-4 px-8 font-label-sm text-on-surface-variant uppercase tracking-wider">Person</th>
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Role &amp; Department</th>
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-center">Social</th>
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Email Status</th>
+<th class="py-4 px-8 font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Confidence</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Selected Row -->
+<tr class="bg-primary/5 border-l-2 border-primary group cursor-pointer hover:bg-primary/10 transition-colors">
+<td class="py-4 px-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">SM</div>
+<div>
+<div class="text-body-md font-semibold text-primary">Sarah Mitchell</div>
+<div class="text-[11px] font-code text-on-surface-variant/60">@microsoft.com</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="text-body-sm text-on-surface">VP of Engineering</div>
+<div class="text-[11px] text-on-surface-variant opacity-70 uppercase tracking-widest">Infrastructure</div>
+</td>
+<td class="py-4 px-4 text-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="share">share</span>
+</a>
+</td>
+<td class="py-4 px-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Verified</span>
+</td>
+<td class="py-4 px-8 text-right font-code text-primary font-bold">98.4%</td>
+</tr>
+<!-- Standard Rows -->
+<tr class="hover:bg-surface-container/40 cursor-pointer transition-colors">
+<td class="py-4 px-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-xs">DR</div>
+<div>
+<div class="text-body-md font-medium">David Rodriguez</div>
+<div class="text-[11px] font-code text-on-surface-variant/60">@aws.amazon.com</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="text-body-sm">Lead Solutions Architect</div>
+<div class="text-[11px] text-on-surface-variant opacity-70 uppercase tracking-widest">Cloud Operations</div>
+</td>
+<td class="py-4 px-4 text-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="share">share</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-amber-500/10 text-amber-500 border border-amber-500/20">Pending</span>
+</td>
+<td class="py-4 px-8 text-right font-code text-on-surface-variant">92.1%</td>
+</tr>
+<tr class="hover:bg-surface-container/40 cursor-pointer transition-colors">
+<td class="py-4 px-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-xs">EL</div>
+<div>
+<div class="text-body-md font-medium">Elena Lysenko</div>
+<div class="text-[11px] font-code text-on-surface-variant/60">@google.com</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="text-body-sm">Director of Product</div>
+<div class="text-[11px] text-on-surface-variant opacity-70 uppercase tracking-widest">AI Systems</div>
+</td>
+<td class="py-4 px-4 text-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="share">share</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Verified</span>
+</td>
+<td class="py-4 px-8 text-right font-code text-on-surface-variant">96.8%</td>
+</tr>
+<tr class="hover:bg-surface-container/40 cursor-pointer transition-colors">
+<td class="py-4 px-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-xs">TK</div>
+<div>
+<div class="text-body-md font-medium">Thomas Klein</div>
+<div class="text-[11px] font-code text-on-surface-variant/60">@stripe.com</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="text-body-sm">CTO</div>
+<div class="text-[11px] text-on-surface-variant opacity-70 uppercase tracking-widest">Executive</div>
+</td>
+<td class="py-4 px-4 text-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="share">share</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-rose-500/10 text-rose-500 border border-rose-500/20">Bounced</span>
+</td>
+<td class="py-4 px-8 text-right font-code text-on-surface-variant">89.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Right Detail Pane -->
+<aside class="w-[420px] border-l border-outline-variant/30 glass-panel flex flex-col p-8 gap-8 overflow-y-auto custom-scrollbar">
+<!-- Contact Header -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="w-16 h-16 rounded-xl overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Close-up professional portrait of Sarah Mitchell" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7s70t47WlOyQ0O5PdF_1RtBwQ97eAaGz8D9Uz7-NDbWn0YU_2q5JUmC16OThLzEtSSp0vN6uDiiy0Dfcav9VVg8A8FPhHBe9I0TBnQhyKlN-t1Elx_Pi0IgVEkEakJ6ihInNJIbQTddcett0QaXwa7IzDjdf3In5P-2NQ6ELdjK1q1hsrVkR11Ok23flJDfsfOuDoL-VlVuIiOtbHqcCu2tRix8uVaak6SHgpWm6HCm7rRBCbGFJzAQ">
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-[3px] border-surface rounded-full"></div>
+</div>
+<div>
+<h3 class="font-display-sm text-display-sm">Sarah Mitchell</h3>
+<p class="text-body-sm text-primary font-medium">VP of Engineering at Microsoft</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- AI Intelligence Card -->
+<div class="bg-primary/5 border border-primary/20 p-6 rounded-2xl ai-glow relative overflow-hidden group hover:border-primary/40 transition-all">
+<div class="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-[48px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="verified">verified</span>
+<h4 class="font-label-caps text-primary uppercase tracking-widest">AI Priority Match</h4>
+</div>
+<p class="text-body-sm leading-relaxed mb-4">
+                High value due to recent <span class="text-primary font-bold">Series D funding</span> and a 20% team expansion in Infrastructure. Her tech stack (Kubernetes, Go, AWS) aligns 94% with your solution's core integration capabilities.
+            </p>
+<div class="flex gap-2">
+<span class="bg-surface-container-high/50 px-3 py-1 rounded-lg text-[10px] font-code border border-outline-variant/30 uppercase text-on-surface-variant">High Intent</span>
+<span class="bg-surface-container-high/50 px-3 py-1 rounded-lg text-[10px] font-code border border-outline-variant/30 uppercase text-on-surface-variant">Decision Maker</span>
+</div>
+</div>
+<!-- Outreach Suggestions -->
+<div class="space-y-5">
+<h4 class="font-label-caps text-on-surface-variant uppercase tracking-[0.2em]">Suggested Outreach</h4>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container border border-outline-variant/30 rounded-xl group cursor-pointer hover:border-primary transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Context: Recent Promotion</span>
+<span class="material-symbols-outlined text-[16px] opacity-0 group-hover:opacity-100 transition-opacity text-primary" data-icon="content_copy">content_copy</span>
+</div>
+<p class="text-body-sm italic opacity-80">"Congrats on the VP role, Sarah. Saw Microsoft is pushing hard on edge-computing infra—wondering if your team has explored..."</p>
+</div>
+<div class="p-4 bg-surface-container border border-outline-variant/30 rounded-xl group cursor-pointer hover:border-primary transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Context: Tech Stack Pain</span>
+<span class="material-symbols-outlined text-[16px] opacity-0 group-hover:opacity-100 transition-opacity text-primary" data-icon="content_copy">content_copy</span>
+</div>
+<p class="text-body-sm italic opacity-80">"Notice you're scaling Kubernetes clusters rapidly. Usually, that introduces visibility gaps in multi-region deployments. We built..."</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-auto space-y-3">
+<button class="w-full bg-primary text-on-primary-container font-label-caps py-3.5 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-[0.98] shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+                Write Sequence
+            </button>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container border border-outline-variant/30 text-on-surface font-label-caps py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]" data-icon="playlist_add">playlist_add</span>
+                    Add to List
+                </button>
+<button class="bg-surface-container border border-outline-variant/30 text-on-surface font-label-caps py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]" data-icon="launch">launch</span>
+                    LinkedIn
+                </button>
+</div>
+</div>
+</aside>
+</main>
+<!-- AI Command Bar (Shortcut Indicator) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+<div class="bg-surface-container-highest/90 backdrop-blur border border-primary/40 px-6 py-3 rounded-full flex items-center gap-5 ai-glow">
+<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
+<div class="flex items-center gap-3">
+<span class="text-sm text-on-surface-variant">Press</span>
+<div class="flex gap-1.5">
+<kbd class="px-2 py-1 rounded bg-surface-container border border-outline-variant/50 text-[10px] font-code text-on-surface">CMD</kbd>
+<span class="text-on-surface-variant font-bold">+</span>
+<kbd class="px-2 py-1 rounded bg-surface-container border border-outline-variant/50 text-[10px] font-code text-on-surface">K</kbd>
+</div>
+<span class="text-sm text-on-surface-variant">for Quick Actions</span>
+</div>
+</div>
+</div>
+</body></html>

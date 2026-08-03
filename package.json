@@ -1,0 +1,14 @@
+{
+  "name": "leadforge_ai",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"WEB,API\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run dev -w web\" \"npm run start:dev -w api\""
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.4"
+  }
+}

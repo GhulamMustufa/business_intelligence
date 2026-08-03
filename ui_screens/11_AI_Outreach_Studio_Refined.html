@@ -1,0 +1,382 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LeadForge AI | Outreach Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px 2px rgba(129, 140, 248, 0.12);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #454653;
+            border-radius: 10px;
+        }
+        .variable-tag {
+            background: rgba(129, 140, 248, 0.15);
+            color: #bdc2ff;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-family: 'Geist', sans-serif;
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary": "#402d00",
+                        "on-secondary-container": "#a7b6cc",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface-variant": "#c6c5d5",
+                        "on-tertiary-container": "#3e2b00",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-fixed": "#d4e4fa",
+                        "outline-variant": "#454653",
+                        "secondary": "#b9c8de",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ffdea3",
+                        "primary-fixed": "#e0e0ff",
+                        "on-primary-container": "#101b8a",
+                        "on-secondary": "#233143",
+                        "surface-container-high": "#222a3d",
+                        "primary": "#bdc2ff",
+                        "on-primary-fixed-variant": "#2f3aa3",
+                        "surface": "#0b1326",
+                        "tertiary": "#f7bd3e",
+                        "surface-tint": "#bdc2ff",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "outline": "#908f9e",
+                        "inverse-primary": "#4953bc",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "on-surface": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "background": "#0b1326",
+                        "on-primary": "#131e8c",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#000767",
+                        "tertiary-container": "#c08d00",
+                        "on-error": "#690005",
+                        "secondary-container": "#39485a",
+                        "inverse-on-surface": "#283044",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed-dim": "#f7bd3e",
+                        "primary-container": "#818cf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "display": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 flex flex-col w-[240px] h-full bg-surface-container border-r border-outline-variant z-50">
+<div class="p-6 flex flex-col gap-1">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-8 h-8 bg-primary-container flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1">bolt</span>
+</div>
+<div>
+<h1 class="font-headline-md text-xl font-black text-primary-container leading-none">Studio</h1>
+<p class="text-[10px] font-label-sm uppercase tracking-widest text-on-surface-variant opacity-70">LeadForge AI</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-between bg-primary-container text-on-primary-container px-4 py-2.5 rounded-xl font-label-sm mb-6 transition-transform active:scale-95 shadow-lg shadow-primary-container/10">
+<span>New Experiment</span>
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<nav class="flex flex-col gap-1">
+<!-- Prompt Builder Active -->
+<div class="flex items-center gap-3 bg-primary-container text-on-primary-container px-4 py-2.5 rounded-lg cursor-pointer active:opacity-80 transition-all">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-body-md">Prompt Builder</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant px-4 py-2.5 hover:bg-surface-container-high rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="temp_up_down">view_in_ar_new</span>
+<span class="font-body-md">Tone &amp; Style</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant px-4 py-2.5 hover:bg-surface-container-high rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="token">token</span>
+<span class="font-body-md">Variables</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant px-4 py-2.5 hover:bg-surface-container-high rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="auto_fix_high">auto_fix_high</span>
+<span class="font-body-md">AI Rewriter</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant px-4 py-2.5 hover:bg-surface-container-high rounded-lg transition-all cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body-md">Version History</span>
+</div>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-outline-variant">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:text-on-surface transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-body-md">Feedback</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:text-on-surface transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md">Support</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-[240px] flex flex-col h-screen overflow-hidden bg-surface">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center h-16 px-8 w-full bg-surface border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-xl border border-outline-variant w-80 group">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm p-0 w-full placeholder:text-on-surface-variant/50" placeholder="Search templates or campaigns..." type="text">
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Campaigns</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Templates</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 mr-2">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary-container transition-colors">history</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary-container transition-colors">notifications</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary-container transition-colors">settings</button>
+</div>
+<button class="bg-primary-container text-on-primary-container px-5 py-2 rounded-xl font-label-sm hover:opacity-90 transition-transform active:scale-95">Send Email</button>
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn2HUsDAPXzKddFmYYBfmZYLWisCTrQhx6_Mfn-T-VlaJlvXvyc8Edk-SowhM5DLj7k7uRdaWdiO5niFWWMYiXraJgjuiPwNRxT7-7ggPi3RYBtztvG-BOYTJFCmfaacGBI5tEMfRGX_IfsoxTwWK6r1OX57w8WK3EkYB1X82TkYwiTHPUYCJGweRnW-LJiF02yjPDorZdk2kSXmZG5AiZfLxqr8mTa6qEOeFIZXUWk-URgMCNndb-Hw">
+</div>
+</div>
+</header>
+<!-- Workspace Layout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Pane: Prompt Panel -->
+<section class="w-1/4 min-w-[320px] border-r border-outline-variant flex flex-col bg-surface-container-low/50">
+<div class="p-6 flex flex-col gap-8 h-full overflow-y-auto custom-scrollbar">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Base Prompt</label>
+<textarea class="w-full h-64 bg-surface-container-lowest border border-outline-variant rounded-xl p-4 text-sm font-body-md focus:ring-1 focus:ring-primary-container focus:border-primary-container placeholder:text-on-surface-variant/40 resize-none text-on-surface" placeholder="Explain the value proposition...">Draft a personalized outreach for {{first_name}} at {{company}}. Focus on how our AI-driven lead scoring can reduce their SDR research time by 40%. Mention our recent case study with Salesforce.</textarea>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Tone Profile</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="px-3 py-2.5 text-left text-sm border border-primary-container bg-primary-container/10 text-primary-container rounded-lg flex items-center justify-between">
+                            Professional <span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<button class="px-3 py-2.5 text-left text-sm border border-outline-variant hover:border-on-surface-variant text-on-surface-variant rounded-lg transition-colors">Casual</button>
+<button class="px-3 py-2.5 text-left text-sm border border-outline-variant hover:border-on-surface-variant text-on-surface-variant rounded-lg transition-colors">Persuasive</button>
+<button class="px-3 py-2.5 text-left text-sm border border-outline-variant hover:border-on-surface-variant text-on-surface-variant rounded-lg transition-colors">Direct</button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Output Length</label>
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-xl border border-outline-variant">
+<button class="flex-1 py-1.5 text-[11px] font-label-sm text-on-surface-variant hover:text-on-surface transition-colors rounded-lg">Short</button>
+<button class="flex-1 py-1.5 text-[11px] font-label-sm bg-surface-container-highest text-on-surface rounded-lg border border-outline-variant">Medium</button>
+<button class="flex-1 py-1.5 text-[11px] font-label-sm text-on-surface-variant hover:text-on-surface transition-colors rounded-lg">Long</button>
+</div>
+</div>
+<button class="mt-4 w-full bg-primary-container text-on-primary-container py-3.5 rounded-xl font-label-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all ai-glow">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1">auto_awesome</span>
+                    Generate Draft
+                </button>
+</div>
+</section>
+<!-- Center Pane: Generated Email Editor -->
+<section class="flex-1 flex flex-col bg-surface-dim">
+<!-- Toolbar -->
+<div class="h-12 border-b border-outline-variant flex items-center justify-between px-6 bg-surface">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant border-r border-outline-variant pr-6">
+<button class="material-symbols-outlined text-[20px] hover:text-on-surface">format_bold</button>
+<button class="material-symbols-outlined text-[20px] hover:text-on-surface">format_italic</button>
+<button class="material-symbols-outlined text-[20px] hover:text-on-surface">format_list_bulleted</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">To:</span>
+<span class="text-sm text-on-surface bg-surface-container-high px-3 py-1 rounded-full border border-outline-variant">Sarah Mitchell (Microsoft)</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex items-center gap-2 text-[10px] font-label-sm text-primary-container uppercase tracking-widest">
+<span class="w-2 h-2 bg-primary-container rounded-full animate-pulse"></span>
+                        AI Ready
+                    </span>
+</div>
+</div>
+<!-- Editor Canvas -->
+<div class="flex-1 p-12 overflow-y-auto custom-scrollbar flex flex-col items-center">
+<div class="w-full max-w-2xl bg-surface-container border border-outline-variant rounded-2xl shadow-2xl p-8">
+<div class="mb-8 pb-6 border-b border-outline-variant">
+<div class="flex flex-col gap-1">
+<p class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Subject:</p>
+<p class="text-2xl font-headline-md text-on-surface">Accelerating Microsoft's Cloud Sales Velocity</p>
+</div>
+</div>
+<div class="space-y-6 text-body-lg text-on-surface leading-relaxed opacity-90">
+<p>Hi <span class="variable-tag">{{first_name}}</span>,</p>
+<p>I’ve been following <span class="variable-tag">{{company}}</span>'s recent expansion into the APAC cloud market. Given your focus on enterprise agility, I thought you'd find our latest work with Salesforce interesting.</p>
+<p>We recently helped their sales team reduce manual prospect research time by <strong>42%</strong> using LeadForge's autonomous lead scoring engine. By shifting the heavy lifting to AI, their SDRs are now spending nearly 4 additional hours per day actually talking to qualified buyers.</p>
+<p>I'd love to show you how this could integrate directly into Microsoft’s existing stack. Do you have 10 minutes next Tuesday for a brief walkthrough?</p>
+<p>Best,<br>LeadForge AI Team</p>
+</div>
+</div>
+<!-- Editor Actions Floating -->
+<div class="mt-10 flex items-center gap-4">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-outline-variant text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+                        Copy to Clipboard
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-outline-variant text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+                        Export Draft
+                    </button>
+<button class="flex items-center gap-2 px-8 py-2.5 rounded-full bg-primary-container text-on-primary-container font-label-sm shadow-xl shadow-primary-container/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">send</span>
+                        Send Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Right Pane: Intelligence / History -->
+<section class="w-80 border-l border-outline-variant flex flex-col bg-surface-container-low/50">
+<div class="p-6 h-full flex flex-col gap-8 overflow-y-auto custom-scrollbar">
+<!-- AI Suggestions -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">AI Suggestions</h3>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container text-[10px] font-bold">4 NEW</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="p-4 bg-surface-container border border-primary-container/30 rounded-xl hover:border-primary-container transition-all cursor-pointer">
+<p class="text-sm text-on-surface">Add a case study reference from the Fintech sector.</p>
+<button class="mt-3 text-[10px] text-primary-container font-label-sm uppercase tracking-widest hover:underline">Apply Suggestion</button>
+</div>
+<div class="p-4 bg-surface-container border border-outline-variant rounded-xl hover:border-on-surface-variant/40 transition-all cursor-pointer">
+<p class="text-sm text-on-surface opacity-70">The introduction is slightly wordy. Shorten it.</p>
+<button class="mt-3 text-[10px] text-on-surface-variant font-label-sm uppercase tracking-widest hover:underline">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Rewrite Panel -->
+<div>
+<h3 class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70 mb-4">Rewrite Panel</h3>
+<div class="flex flex-col gap-2">
+<button class="w-full flex items-center justify-between p-3 text-sm text-on-surface bg-surface-container border border-outline-variant rounded-xl hover:bg-surface-container-high transition-all">
+<span>Make it more assertive</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 text-sm text-on-surface bg-surface-container border border-outline-variant rounded-xl hover:bg-surface-container-high transition-all">
+<span>Add "Social Proof" section</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 text-sm text-on-surface bg-surface-container border border-outline-variant rounded-xl hover:bg-surface-container-high transition-all">
+<span>Translate to Spanish</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- History Timeline -->
+<div class="mt-auto">
+<h3 class="text-[10px] font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70 mb-4">Version History</h3>
+<div class="flex flex-col gap-6 border-l border-outline-variant ml-2 pl-4">
+<div class="relative">
+<span class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary-container ring-4 ring-surface"></span>
+<p class="text-sm font-semibold text-on-surface">Current Version</p>
+<p class="text-[10px] text-on-surface-variant">Just now · Editor</p>
+</div>
+<div class="relative opacity-60">
+<span class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-outline ring-4 ring-surface"></span>
+<p class="text-sm font-medium text-on-surface-variant">AI Draft V2</p>
+<p class="text-[10px] text-on-surface-variant">2 mins ago · Auto-rewrite</p>
+</div>
+<div class="relative opacity-40">
+<span class="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-outline ring-4 ring-surface"></span>
+<p class="text-sm font-medium text-on-surface-variant">Initial Draft V1</p>
+<p class="text-[10px] text-on-surface-variant">5 mins ago · System</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Command Bar -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+<div class="bg-surface-container/90 backdrop-blur-xl border border-primary-container/30 px-6 py-3.5 rounded-2xl flex items-center gap-4 shadow-2xl ai-glow">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1">auto_awesome</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-96 text-on-surface" placeholder="Ask AI to edit this draft..." type="text">
+<div class="flex items-center gap-1">
+<kbd class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-label-sm text-on-surface-variant border border-outline-variant">⌘</kbd>
+<kbd class="bg-surface-container-high px-2 py-0.5 rounded text-[10px] font-label-sm text-on-surface-variant border border-outline-variant">K</kbd>
+</div>
+</div>
+</div>
+<script>
+    // Micro-interactions for buttons
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.add('scale-95');
+            setTimeout(() => this.classList.remove('scale-95'), 100);
+        });
+    });
+
+    // Editor contenteditable setup
+    const editor = document.querySelector('.space-y-6');
+    if(editor) {
+        editor.setAttribute('contenteditable', 'true');
+        editor.classList.add('outline-none');
+    }
+</script>
+</body></html>

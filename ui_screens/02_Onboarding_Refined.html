@@ -1,0 +1,404 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LeadForge AI Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdea3",
+                    "on-surface-variant": "#c6c5d5",
+                    "on-tertiary-fixed-variant": "#5d4200",
+                    "tertiary-fixed-dim": "#f7bd3e",
+                    "surface": "#0b1326",
+                    "surface-container-highest": "#2d3449",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#0d1c2d",
+                    "tertiary": "#f7bd3e",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "on-secondary-container": "#a7b6cc",
+                    "surface-dim": "#0b1326",
+                    "surface-variant": "#2d3449",
+                    "on-tertiary-container": "#3e2b00",
+                    "on-tertiary": "#402d00",
+                    "inverse-on-surface": "#283044",
+                    "secondary-fixed-dim": "#b9c8de",
+                    "surface-container-lowest": "#060e20",
+                    "surface-tint": "#bdc2ff",
+                    "surface-container-high": "#222a3d",
+                    "surface-container-low": "#131b2e",
+                    "secondary-fixed": "#d4e4fa",
+                    "on-tertiary-fixed": "#261900",
+                    "surface-bright": "#31394d",
+                    "on-primary": "#131e8c",
+                    "on-background": "#dae2fd",
+                    "tertiary-container": "#c08d00",
+                    "outline": "#908f9e",
+                    "on-primary-fixed-variant": "#2f3aa3",
+                    "on-primary-fixed": "#000767",
+                    "surface-container": "#171f33",
+                    "primary": "#818cf8",
+                    "on-secondary-fixed-variant": "#39485a",
+                    "inverse-surface": "#dae2fd",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#4953bc",
+                    "primary-container": "#818cf8",
+                    "background": "#0b1326",
+                    "on-error": "#690005",
+                    "secondary-container": "#39485a",
+                    "on-primary-container": "#101b8a",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#b9c8de",
+                    "on-surface": "#dae2fd",
+                    "on-secondary": "#233143",
+                    "outline-variant": "#454653",
+                    "primary-fixed": "#e0e0ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-desktop": "32px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "display": ["Geist"],
+                    "body-md": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            overflow-x: hidden;
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .selection-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #2d3449;
+        }
+        .selection-card:hover {
+            border-color: #818cf8;
+            background: rgba(129, 140, 248, 0.04);
+            transform: translateY(-2px);
+        }
+        .selection-card.active {
+            border-color: #818cf8;
+            background: rgba(129, 140, 248, 0.1);
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glow {
+            box-shadow: 0 0 30px 2px rgba(129, 140, 248, 0.15);
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(11, 19, 38, 0.8);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full h-16 flex justify-between items-center px-8 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">bubble_chart</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">LeadForge AI</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm uppercase tracking-widest">Help Center</button>
+<div class="h-4 w-[1px] bg-outline-variant/30"></div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="relative min-h-screen pt-24 pb-32 flex flex-col items-center">
+<!-- Progress Indicator -->
+<nav class="w-full max-w-xl px-gutter mb-16">
+<div class="flex justify-between mb-4">
+<span class="font-label-sm text-primary uppercase" id="step-label">Step 1 of 3</span>
+<span class="font-label-sm text-on-surface-variant uppercase" id="step-title-small">Account Setup</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-700 ease-in-out" id="progress-bar" style="width: 33.33%;"></div>
+</div>
+</nav>
+<!-- Onboarding Canvas -->
+<div class="w-full max-w-5xl px-gutter relative">
+<!-- Step 1: Welcome & Role Selection -->
+<section class="step-transition opacity-100 translate-y-0" id="step-1">
+<div class="text-center mb-12">
+<h1 class="font-display text-display mb-4 text-on-surface">Welcome to LeadForge</h1>
+<p class="text-on-surface-variant max-w-md mx-auto text-body-lg">Tell us about your professional role so we can calibrate your intelligent lead engine.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Sales Card -->
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low group flex flex-col items-center text-center" onclick="selectRole('sales', this)">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center mb-6 group-hover:text-primary transition-colors border border-outline-variant/10">
+<span class="material-symbols-outlined text-[28px]">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface">Sales</h3>
+<p class="text-body-md text-on-surface-variant">Closing deals and managing high-value pipelines.</p>
+</div>
+<!-- Marketing Card -->
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low group flex flex-col items-center text-center" onclick="selectRole('marketing', this)">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center mb-6 group-hover:text-primary transition-colors border border-outline-variant/10">
+<span class="material-symbols-outlined text-[28px]">campaign</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface">Marketing</h3>
+<p class="text-body-md text-on-surface-variant">Generating demand and nurturing lead quality.</p>
+</div>
+<!-- Growth Card -->
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low group flex flex-col items-center text-center" onclick="selectRole('growth', this)">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center mb-6 group-hover:text-primary transition-colors border border-outline-variant/10">
+<span class="material-symbols-outlined text-[28px]">trending_up</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface">Growth</h3>
+<p class="text-body-md text-on-surface-variant">Experimenting and scaling top-of-funnel velocity.</p>
+</div>
+<!-- Executive Card -->
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low group flex flex-col items-center text-center" onclick="selectRole('executive', this)">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center mb-6 group-hover:text-primary transition-colors border border-outline-variant/10">
+<span class="material-symbols-outlined text-[28px]">insights</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface">Executive</h3>
+<p class="text-body-md text-on-surface-variant">Strategic oversight and performance reporting.</p>
+</div>
+</div>
+</section>
+<!-- Step 2: Set Your Focus -->
+<section class="step-transition hidden opacity-0 translate-y-8" id="step-2">
+<div class="text-center mb-12">
+<h1 class="font-display text-display mb-4 text-on-surface">Set your focus</h1>
+<p class="text-on-surface-variant max-w-md mx-auto text-body-lg">Which territory should LeadForge prioritize for your initial data mining?</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-3xl mx-auto">
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low flex items-start gap-6" onclick="selectFocus('enterprise', this)">
+<div class="mt-1 flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">corporate_fare</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Enterprise Sales</h3>
+<p class="text-body-md text-on-surface-variant">High-ticket targets, Fortune 500 mapping, and long-cycle strategic accounts.</p>
+</div>
+</div>
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low flex items-start gap-6" onclick="selectFocus('startup', this)">
+<div class="mt-1 flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">rocket_launch</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Startup Growth</h3>
+<p class="text-body-md text-on-surface-variant">Agile series A-C targets, rapid iteration, and disruptor tracking.</p>
+</div>
+</div>
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low flex items-start gap-6" onclick="selectFocus('smb', this)">
+<div class="mt-1 flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">storefront</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">SME Outreach</h3>
+<p class="text-body-md text-on-surface-variant">Local markets, volume-based prospecting, and regional business data.</p>
+</div>
+</div>
+<div class="selection-card p-8 rounded-xl cursor-pointer bg-surface-container-low flex items-start gap-6" onclick="selectFocus('global', this)">
+<div class="mt-1 flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">public</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Global Scale</h3>
+<p class="text-body-md text-on-surface-variant">Cross-border opportunities and international lead intelligence.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3: Connect Data -->
+<section class="step-transition hidden opacity-0 translate-y-8" id="step-3">
+<div class="text-center mb-10">
+<h1 class="font-display text-display mb-4 text-on-surface">Connect your data</h1>
+<p class="text-on-surface-variant max-w-md mx-auto text-body-lg">LeadForge AI performs best when synced with your current ecosystem.</p>
+</div>
+<div class="flex flex-col gap-4 max-w-xl mx-auto">
+<div class="flex items-center justify-between p-6 bg-surface-container-low border border-outline-variant/10 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-[#FF5029] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#FF5029]/20">H</div>
+<div>
+<h4 class="font-headline-md text-[18px] text-on-surface">HubSpot</h4>
+<p class="text-body-md text-on-surface-variant">Sync CRM contacts and deal stages.</p>
+</div>
+</div>
+<button class="bg-primary/10 text-primary px-6 py-2 rounded-full font-label-sm group-hover:bg-primary group-hover:text-white transition-all border border-primary/20">CONNECT</button>
+</div>
+<div class="flex items-center justify-between p-6 bg-surface-container-low border border-outline-variant/10 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-[#00A1E0] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#00A1E0]/20">S</div>
+<div>
+<h4 class="font-headline-md text-[18px] text-on-surface">Salesforce</h4>
+<p class="text-body-md text-on-surface-variant">Import enterprise account structures.</p>
+</div>
+</div>
+<button class="bg-primary/10 text-primary px-6 py-2 rounded-full font-label-sm group-hover:bg-primary group-hover:text-white transition-all border border-primary/20">CONNECT</button>
+</div>
+<div class="flex items-center justify-between p-6 bg-surface-container-low border border-outline-variant/10 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-[#0077B5] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#0077B5]/20">L</div>
+<div>
+<h4 class="font-headline-md text-[18px] text-on-surface">LinkedIn Sales Nav</h4>
+<p class="text-body-md text-on-surface-variant">Verify persona data in real-time.</p>
+</div>
+</div>
+<button class="bg-primary/10 text-primary px-6 py-2 rounded-full font-label-sm group-hover:bg-primary group-hover:text-white transition-all border border-primary/20">CONNECT</button>
+</div>
+<div class="mt-8 p-6 rounded-xl bg-primary/5 border border-primary/20 flex gap-5 items-center ai-glow">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<p class="text-body-md text-on-surface-variant">
+<strong class="text-primary font-semibold">AI Ready:</strong> LeadForge is already processing baseline market signals while you wait.
+                        </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Bottom Navigation -->
+<footer class="fixed bottom-0 w-full p-8 bg-surface/50 backdrop-blur-xl border-t border-outline-variant/10 flex justify-center z-50">
+<div class="w-full max-w-5xl flex justify-between items-center">
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl border border-outline-variant/20 text-on-surface hover:bg-surface-container-high transition-all disabled:opacity-0" disabled="" id="prev-btn" onclick="prevStep()">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-sm uppercase tracking-wider">Previous</span>
+</button>
+<div class="flex items-center gap-8">
+<button class="text-on-surface-variant hover:text-on-surface font-label-sm uppercase tracking-widest hidden sm:block">Skip for now</button>
+<button class="flex items-center gap-3 px-10 py-3.5 rounded-xl bg-primary text-on-primary font-label-sm uppercase tracking-widest shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all" id="next-btn" onclick="nextStep()">
+<span>Continue</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- Visual Polish: Background Aura -->
+<div class="fixed top-0 right-0 -z-10 w-2/3 h-full opacity-10 pointer-events-none bg-gradient-to-l from-primary/20 to-transparent blur-[120px]"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-1/3 h-2/3 opacity-5 pointer-events-none bg-gradient-to-tr from-primary/30 to-transparent blur-[100px]"></div>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateUI() {
+            // Hide all steps
+            for (let i = 1; i <= totalSteps; i++) {
+                const el = document.getElementById(`step-${i}`);
+                el.classList.add('hidden');
+                el.classList.add('opacity-0');
+                el.classList.add('translate-y-8');
+                el.classList.remove('opacity-100');
+                el.classList.remove('translate-y-0');
+            }
+
+            // Show current step
+            const currentEl = document.getElementById(`step-${currentStep}`);
+            currentEl.classList.remove('hidden');
+            setTimeout(() => {
+                currentEl.classList.remove('opacity-0');
+                currentEl.classList.remove('translate-y-8');
+                currentEl.classList.add('opacity-100');
+                currentEl.classList.add('translate-y-0');
+            }, 50);
+
+            // Update Progress
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('step-label').innerText = `Step ${currentStep} of ${totalSteps}`;
+            
+            if (currentStep === 1) document.getElementById('step-title-small').innerText = 'Account Setup';
+            if (currentStep === 2) document.getElementById('step-title-small').innerText = 'Intelligence Focus';
+            if (currentStep === 3) document.getElementById('step-title-small').innerText = 'Data Pipeline';
+
+            // Buttons
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            if (currentStep === 1) {
+                prevBtn.disabled = true;
+                prevBtn.classList.add('opacity-0');
+            } else {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('opacity-0');
+            }
+
+            if (currentStep === 3) {
+                nextBtn.innerHTML = '<span>Finish Setup</span><span class="material-symbols-outlined">check</span>';
+            } else {
+                nextBtn.innerHTML = '<span>Continue</span><span class="material-symbols-outlined">arrow_forward</span>';
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            } else {
+                // Final success state
+                const main = document.querySelector('main');
+                main.innerHTML = `
+                    <div class="flex flex-col items-center justify-center min-h-[70vh] text-center px-gutter">
+                        <div class="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center mb-10 ai-glow">
+                             <span class="material-symbols-outlined text-primary" style="font-size: 64px;">verified</span>
+                        </div>
+                        <h1 class="font-display text-display mb-6 text-on-surface">Your forge is ready</h1>
+                        <p class="text-on-surface-variant max-w-lg mb-12 text-body-lg">LeadForge AI is currently indexing 400M+ data points based on your criteria. Welcome aboard.</p>
+                        <button class="px-12 py-4 bg-primary text-on-primary font-label-sm uppercase tracking-widest rounded-xl shadow-xl shadow-primary/30 hover:scale-[1.02] transition-transform">Go to Dashboard</button>
+                    </div>
+                `;
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function selectRole(role, element) {
+            const cards = document.querySelectorAll('#step-1 .selection-card');
+            cards.forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function selectFocus(focus, element) {
+            const cards = document.querySelectorAll('#step-2 .selection-card');
+            cards.forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body></html>

@@ -34,7 +34,7 @@ export async function exportLeads(searchParams: URLSearchParams, token: string) 
   const a = document.createElement('a');
   a.style.display = 'none';
   a.href = url;
-  a.download = 'leadforge_export.csv';
+  a.download = 'bizradar_export.csv';
   document.body.appendChild(a);
   a.click();
   window.URL.revokeObjectURL(url);

@@ -4,7 +4,7 @@ import { fetchSavedLeads } from '../../../lib/api/saved-leads.server';
 import { fetchFolders } from '../../../lib/api/folders.server';
 
 export const metadata: Metadata = {
-  title: 'Saved Leads - LeadForge AI',
+  title: 'Saved Leads - BizRadar',
   description: 'Manage and organize high-potential leads',
 };
 

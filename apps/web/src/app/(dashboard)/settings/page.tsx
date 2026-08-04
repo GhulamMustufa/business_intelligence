@@ -3,7 +3,7 @@ import SettingsLayout from '../../../components/settings/SettingsLayout';
 import { fetchBilling } from '../../../lib/api/billing.server';
 
 export const metadata: Metadata = {
-  title: 'Settings - LeadForge AI',
+  title: 'Settings - BizRadar',
   description: 'Manage your profile, workspace, and billing',
 };
 

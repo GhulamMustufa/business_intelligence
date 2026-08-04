@@ -49,7 +49,7 @@ export default function ResultsPane({
     
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'leadforge_discovery_export.csv');
+    link.setAttribute('download', 'bizradar_discovery_export.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

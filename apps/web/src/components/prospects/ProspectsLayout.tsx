@@ -195,7 +195,7 @@ export default function ProspectsLayout({ initialLeads, totalLeads, initialFolde
         {/* AI Command Bar */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-surface-container-highest border border-primary-container/30 rounded-full px-5 py-2.5 shadow-[0_0_15px_2px_rgba(189,194,255,0.08)] transition-all hover:scale-[1.02] cursor-pointer group backdrop-blur-xl">
           <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
-          <span className="text-sm font-semibold text-on-surface">Ask LeadForge AI to find more leads like these...</span>
+          <span className="text-sm font-semibold text-on-surface">Ask BizRadar to find more leads like these...</span>
           <div className="flex items-center gap-1 ml-4 bg-white/10 px-2.5 py-1 rounded-lg text-[10px] font-label-sm text-white/60">
             <span>⌘</span><span>K</span>
           </div>

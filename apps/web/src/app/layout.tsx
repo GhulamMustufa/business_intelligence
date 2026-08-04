@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LeadForge AI | Intelligence Dashboard",
+  title: "BizRadar | Intelligence Dashboard",
   description: "Production-grade AI Lead Intelligence SaaS",
 };
 

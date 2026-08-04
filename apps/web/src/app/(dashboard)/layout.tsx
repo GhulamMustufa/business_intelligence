@@ -32,8 +32,8 @@ export default function DashboardLayout({
       <aside className="w-[240px] flex-shrink-0 bg-surface-container-lowest border-r border-outline-variant/20 flex flex-col z-40 hidden md:flex">
         {/* Brand Header */}
         <div className="h-16 px-gutter flex items-center gap-3">
-          <Image src="/logo.png" alt="LeadForge AI Logo" width={32} height={32} className="object-contain" />
-          <span className="font-display text-[20px] font-extrabold tracking-tight text-white">LeadForge AI</span>
+          <Image src="/logo.png" alt="BizRadar Logo" width={32} height={32} className="object-contain" />
+          <span className="font-display text-[20px] font-extrabold tracking-tight text-white">BizRadar</span>
         </div>
         
         <nav className="flex-1 px-4 py-6 space-y-1">

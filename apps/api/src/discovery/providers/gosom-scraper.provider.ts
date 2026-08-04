@@ -1,5 +1,4 @@
-import { IDiscoveryProvider } from './discovery-provider.interface';
-import { DiscoveredBusiness } from '../interfaces/discovered-business.interface';
+import { IDiscoveryProvider, DiscoveredBusiness } from '../interfaces/discovery-provider.interface';
 import { Logger } from '@nestjs/common';
 import csvParser from 'csv-parser';
 import { Readable } from 'stream';
@@ -8,8 +7,10 @@ export class GosomScraperProvider implements IDiscoveryProvider {
   private readonly logger = new Logger(GosomScraperProvider.name);
   private readonly apiUrl = process.env.GOSOM_API_URL || 'http://localhost:8081';
 
-  async discover(query: string, location: string, industry: string): Promise<DiscoveredBusiness[]> {
-    const searchQuery = `${industry} in ${location} ${query}`.trim();
+  async searchBusinesses(query?: string, locations?: string[], industries?: string[]): Promise<DiscoveredBusiness[]> {
+    const locStr = locations?.join(' ') || '';
+    const indStr = industries?.join(' ') || '';
+    const searchQuery = `${indStr} in ${locStr} ${query || ''}`.trim();
     this.logger.log(`Starting Gosom scraper job for query: ${searchQuery}`);
 
     try {
@@ -95,7 +96,6 @@ export class GosomScraperProvider implements IDiscoveryProvider {
               industry: data.category,
               phone: data.phone,
               rating: data.rating ? parseFloat(data.rating) : undefined,
-              reviewsCount: data.reviews ? parseInt(data.reviews, 10) : undefined,
             });
           }
         })

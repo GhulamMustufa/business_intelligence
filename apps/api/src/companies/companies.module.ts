@@ -6,9 +6,10 @@ import { AiModule } from '../ai/ai.module';
 import { DiscoveryModule } from '../discovery/discovery.module';
 import { EnrichmentService } from './enrichment.service';
 import { ConfigModule } from '@nestjs/config';
+import { DecisionMakersModule } from '../decision-makers/decision-makers.module';
 
 @Module({
-  imports: [PrismaModule, AiModule, DiscoveryModule, ConfigModule],
+  imports: [PrismaModule, AiModule, DiscoveryModule, ConfigModule, DecisionMakersModule],
   controllers: [CompaniesController],
   providers: [CompaniesService, EnrichmentService]
 })

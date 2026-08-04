@@ -7,6 +7,7 @@ import { AiModule } from '../ai/ai.module';
 @Module({
   imports: [PrismaModule, AiModule],
   controllers: [DecisionMakersController],
-  providers: [DecisionMakersService]
+  providers: [DecisionMakersService],
+  exports: [DecisionMakersService]
 })
 export class DecisionMakersModule {}

@@ -8,9 +8,13 @@ export class GosomScraperProvider implements IDiscoveryProvider {
   private readonly apiUrl = process.env.GOSOM_API_URL || 'http://localhost:8081';
 
   async searchBusinesses(query?: string, locations?: string[], industries?: string[]): Promise<DiscoveredBusiness[]> {
-    const locStr = locations?.join(' ') || '';
-    const indStr = industries?.join(' ') || '';
-    const searchQuery = `${indStr} in ${locStr} ${query || ''}`.trim();
+    const locStr = (locations?.join(' ') || '').trim();
+    const indStr = (industries?.join(' ') || '').trim();
+    const parts = [];
+    if (indStr) parts.push(indStr);
+    if (locStr) parts.push(`in ${locStr}`);
+    if (query) parts.push(query);
+    const searchQuery = parts.join(' ').trim();
     this.logger.log(`Starting Gosom scraper job for query: ${searchQuery}`);
 
     try {
@@ -19,14 +23,18 @@ export class GosomScraperProvider implements IDiscoveryProvider {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          queries: [searchQuery],
-          depth: 40, // Scrape up to 40 results per query
-          email: true,
-          language: 'en',
+          name: `Discovery Search: ${searchQuery}`,
+          keywords: [searchQuery],
+          depth: 2,
+          email: false,
+          lang: 'en',
+          max_time: 15,
         }),
       });
 
       if (!createResponse.ok) {
+        const errText = await createResponse.text();
+        this.logger.error(`Gosom rejection details: ${errText}`);
         throw new Error(`Failed to create job: ${createResponse.statusText}`);
       }
 
@@ -38,7 +46,7 @@ export class GosomScraperProvider implements IDiscoveryProvider {
       // 2. Poll until finished
       let isCompleted = false;
       let attempts = 0;
-      const maxAttempts = 30; // 30 * 2 seconds = 60 seconds
+      const maxAttempts = 90; // 90 * 2 seconds = 180 seconds
 
       while (!isCompleted && attempts < maxAttempts) {
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -48,12 +56,13 @@ export class GosomScraperProvider implements IDiscoveryProvider {
         if (!statusResponse.ok) continue;
 
         const statusData = await statusResponse.json();
-        this.logger.debug(`Job ${jobId} status: ${statusData.status}`);
+        const currentStatus = (statusData.Status || statusData.status || '').toLowerCase();
+        this.logger.debug(`Job ${jobId} status: ${currentStatus}`);
 
-        if (statusData.status === 'completed' || statusData.status === 'finished' || statusData.status === 'success') {
+        if (currentStatus === 'completed' || currentStatus === 'finished' || currentStatus === 'success' || currentStatus === 'ok') {
           isCompleted = true;
-        } else if (statusData.status === 'failed' || statusData.status === 'error') {
-          throw new Error(`Scraper job failed: ${statusData.error}`);
+        } else if (currentStatus === 'failed' || currentStatus === 'error') {
+          throw new Error(`Scraper job failed: ${statusData.error || 'Unknown error'}`);
         }
       }
 

@@ -70,26 +70,64 @@ export default function AIInsightsPane({ insights, isLoading, isGenerating, onGe
           </div>
         </div>
 
-        {/* Key Buying Signals */}
-        {insights.buyingSignals && insights.buyingSignals.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest">Key Buying Signals</h4>
-              <div className="h-px flex-1 bg-outline-variant/30 ml-4"></div>
-            </div>
-            <ul className="space-y-4">
-              {insights.buyingSignals.map((signal: any, idx: number) => (
-                <li key={idx} className="flex items-start gap-4">
-                  <span className="material-symbols-outlined text-primary-container mt-0.5" style={{ fontSize: '18px' }}>{signal.icon}</span>
-                  <div>
-                    <p className="font-body-md text-sm font-bold text-on-surface">{signal.title}</p>
-                    <p className="font-label-sm text-[11px] text-on-surface-variant">{signal.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+        {/* AI Opportunity */}
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest">AI Opportunity</h4>
+            <div className="h-px flex-1 bg-outline-variant/30 ml-4"></div>
           </div>
-        )}
+
+          <div className="p-5 rounded-xl border border-outline-variant bg-surface-container-low space-y-6">
+            
+            {/* Website Score */}
+            <div className="flex items-center justify-between">
+              <span className="font-body-md text-sm font-bold text-on-surface">Website Score:</span>
+              <div className="flex items-center gap-2">
+                <div className="w-16 bg-surface-container-highest rounded-full h-2 overflow-hidden">
+                  <div className={`h-full ${insights.websiteScore > 50 ? 'bg-tertiary' : 'bg-error'}`} style={{ width: `${insights.websiteScore || 0}%` }}></div>
+                </div>
+                <span className={`font-body-md text-sm font-bold ${insights.websiteScore > 50 ? 'text-tertiary' : 'text-error'}`}>{insights.websiteScore || 'N/A'}/100</span>
+              </div>
+            </div>
+
+            {/* Problems */}
+            {insights.digitalWeaknesses && insights.digitalWeaknesses.length > 0 && (
+              <div>
+                <span className="font-body-md text-sm font-bold text-on-surface mb-2 block">Problems:</span>
+                <ul className="space-y-2">
+                  {insights.digitalWeaknesses.map((prob: string, idx: number) => (
+                    <li key={idx} className="flex items-start gap-2 text-on-surface-variant font-body-md text-sm leading-tight">
+                      <span className="text-error text-[12px] mt-0.5 font-bold">✕</span>
+                      {prob}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Recommended Services */}
+            {insights.recommendedServices && insights.recommendedServices.length > 0 && (
+              <div>
+                <span className="font-body-md text-sm font-bold text-on-surface mb-2 block">Recommended Services:</span>
+                <ul className="space-y-2">
+                  {insights.recommendedServices.map((service: string, idx: number) => (
+                    <li key={idx} className="flex items-start gap-2 text-on-surface font-body-md text-sm leading-tight">
+                      <span className="text-tertiary font-bold text-[12px] mt-0.5">✔</span>
+                      {service}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Estimated Project Value */}
+            <div className="pt-4 border-t border-outline-variant/50">
+              <span className="font-body-md text-xs text-on-surface-variant uppercase tracking-widest block mb-1">Estimated Project Value:</span>
+              <span className="font-headline-sm text-2xl text-primary-container font-bold">{insights.estimatedProjectValue || 'N/A'}</span>
+            </div>
+
+          </div>
+        </div>
 
         {/* Suggested Outreach */}
         <div>

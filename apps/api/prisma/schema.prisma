@@ -84,6 +84,9 @@ model AIInsight {
   growthScore              Int?
   aiReadiness              String?
   likelihoodToNeedServices String?
+  websiteScore             Int?
+  recommendedServices      Json?
+  estimatedProjectValue    String?
   suggestedSalesAngle      String? @db.Text
   recommendedOutreach      String? @db.Text
 
@@ -106,6 +109,7 @@ model DecisionMaker {
   name      String
   title     String
   photoUrl  String?
+  linkedinUrl String?
 
   emailDomain     String?
   department      String?

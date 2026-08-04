@@ -3,6 +3,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import type { IDiscoveryProvider } from '../discovery/interfaces/discovery-provider.interface';
 import { EnrichmentService } from './enrichment.service';
+import { DecisionMakersService } from '../decision-makers/decision-makers.service';
+import { AiService } from '../ai/ai.service';
 
 export interface GetCompaniesFilters {
   search?: string;
@@ -19,7 +21,9 @@ export class CompaniesService {
   constructor(
     private prisma: PrismaService,
     @Inject('DISCOVERY_PROVIDER') private discoveryProvider: IDiscoveryProvider,
-    private enrichmentService: EnrichmentService
+    private enrichmentService: EnrichmentService,
+    private decisionMakersService: DecisionMakersService,
+    private aiService: AiService
   ) {}
 
   async findAll(filters: GetCompaniesFilters) {
@@ -35,47 +39,49 @@ export class CompaniesService {
       
       // Upsert discovered businesses into our database manually since name is not @unique
       if (discovered.length > 0) {
-        for (const business of discovered) {
-          discoveredNames.push(business.name);
-          
-          // Enrich the company data
-          const enriched = await this.enrichmentService.enrichCompanyData(business.name, business.website);
-          
-          const existing = await this.prisma.company.findFirst({
-            where: { name: business.name }
-          });
-          
-          if (existing) {
-            await this.prisma.company.update({
-              where: { id: existing.id },
-              data: {
-                website: enriched.website || business.website || existing.website,
-                logoUrl: enriched.logoUrl || existing.logoUrl,
-                linkedInUrl: enriched.linkedInUrl || existing.linkedInUrl,
-                location: business.location || existing.location,
-                googleRating: business.rating || existing.googleRating,
-                phone: business.phone || existing.phone,
-              }
+        await Promise.all(
+          discovered.map(async (business) => {
+            discoveredNames.push(business.name);
+            
+            // Enrich the company data
+            const enriched = await this.enrichmentService.enrichCompanyData(business.name, business.website);
+            
+            const existing = await this.prisma.company.findFirst({
+              where: { name: business.name }
             });
-          } else {
-            await this.prisma.company.create({
-              data: {
-                name: business.name,
-                website: enriched.website || business.website || 'https://example.com',
-                logoUrl: enriched.logoUrl || null,
-                linkedInUrl: enriched.linkedInUrl || null,
-                location: business.location || 'Unknown',
-                industry: business.industry || 'Unknown',
-                phone: business.phone || null,
-                googleRating: business.rating || null,
-                baseScore: 50, // Default base score
-                employeeSizeMin: 1, // Default required fields
-                employeeSizeMax: 10,
-                annualRevenue: '$0 - $1M'
-              }
-            });
-          }
-        }
+            
+            if (existing) {
+              await this.prisma.company.update({
+                where: { id: existing.id },
+                data: {
+                  website: enriched.website || business.website || existing.website,
+                  logoUrl: enriched.logoUrl || existing.logoUrl,
+                  linkedInUrl: enriched.linkedInUrl || existing.linkedInUrl,
+                  location: business.location || existing.location,
+                  googleRating: business.rating || existing.googleRating,
+                  phone: business.phone || existing.phone,
+                }
+              });
+            } else {
+              await this.prisma.company.create({
+                data: {
+                  name: business.name,
+                  website: enriched.website || business.website || 'https://example.com',
+                  logoUrl: enriched.logoUrl || null,
+                  linkedInUrl: enriched.linkedInUrl || null,
+                  location: business.location || 'Unknown',
+                  industry: business.industry || 'Unknown',
+                  phone: business.phone || null,
+                  googleRating: business.rating || null,
+                  baseScore: 50,
+                  employeeSizeMin: 1,
+                  employeeSizeMax: 10,
+                  annualRevenue: '$0 - $1M'
+                }
+              });
+            }
+          })
+        );
       }
     }
     // ---------------------------------
@@ -208,11 +214,21 @@ export class CompaniesService {
       return existing;
     }
 
-    return this.prisma.savedLead.create({
+    const savedLead = await this.prisma.savedLead.create({
       data: {
         userId,
         companyId
       }
     });
+
+    // Fire and forget: generate intelligence in background
+    Promise.all([
+      this.decisionMakersService.findDecisionMakersForCompany(companyId),
+      this.aiService.generateCompanyInsights(companyId)
+    ]).catch(err => {
+      console.error('Failed to generate background intelligence after saving lead:', err);
+    });
+
+    return savedLead;
   }
 }

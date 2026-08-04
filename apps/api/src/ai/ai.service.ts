@@ -55,26 +55,87 @@ export class AiService {
 
     if (!company) throw new InternalServerErrorException('Company not found');
 
-    const systemPrompt = `You are an expert B2B sales intelligence AI. Analyze the provided company profile and generate structured insights.
+    let techSignalsContext = 'No tech/hiring signals found.';
+    let growthSignalsContext = 'No growth signals found.';
+    let appSignalsContext = 'No mobile app signals found.';
+    const apiKey = process.env.SERPAPI_KEY;
+    
+    if (apiKey) {
+      try {
+        // Query 1: Looking for tech hiring or manual labor (Data Entry) which indicates a need for dev/automation
+        const techQuery = `"${company.name}" hiring (developer OR engineer OR "data entry" OR "IT" OR "software")`;
+        const techUrl = `https://serpapi.com/search.json?engine=google&q=${encodeURIComponent(techQuery)}&api_key=${apiKey}&num=10`;
+        
+        // Query 2: Looking for growth or digital transformation which indicates budget for new apps/websites
+        const growthQuery = `"${company.name}" (expansion OR "digital transformation" OR "new website" OR "app launch" OR "new location")`;
+        const growthUrl = `https://serpapi.com/search.json?engine=google&q=${encodeURIComponent(growthQuery)}&api_key=${apiKey}&num=10`;
+
+        // Query 3: Checking if they already have an app or are looking to build one
+        const appQuery = `(site:apps.apple.com OR site:play.google.com) "${company.name}" OR "${company.name}" ("mobile app" OR iOS OR Android)`;
+        const appUrl = `https://serpapi.com/search.json?engine=google&q=${encodeURIComponent(appQuery)}&api_key=${apiKey}&num=10`;
+        
+        const [techRes, growthRes, appRes] = await Promise.all([fetch(techUrl), fetch(growthUrl), fetch(appUrl)]);
+        
+        if (techRes.ok) {
+          const data = await techRes.json();
+          const results = data.organic_results || [];
+          techSignalsContext = results.map((r: any) => `${r.title} - ${r.snippet}`).join('\\n');
+        }
+
+        if (growthRes.ok) {
+          const data = await growthRes.json();
+          const results = data.organic_results || [];
+          growthSignalsContext = results.map((r: any) => `${r.title} - ${r.snippet}`).join('\\n');
+        }
+
+        if (appRes.ok) {
+          const data = await appRes.json();
+          const results = data.organic_results || [];
+          appSignalsContext = results.map((r: any) => `${r.title} - ${r.snippet}`).join('\\n');
+        }
+      } catch (err) {
+        console.warn('Failed to fetch SerpApi context', err);
+      }
+    }
+
+    const systemPrompt = `You are an elite, aggressive B2B sales strategist for a high-end Web Development and AI Automation Agency. 
+Your mission is to analyze this prospect and ruthlessly identify their digital weaknesses, operational bottlenecks, and reasons they urgently need a new website, a mobile app, or AI automation.
+Analyze their industry, size, and the provided Google search context (hiring, growth, and mobile app signals). 
+
+CRITICAL INSTRUCTIONS:
+- If they have no mobile app, suggest pitching a mobile app as a competitive differentiator.
+- If they are hiring data entry/admin staff, pitch AI automation to replace manual labor.
+- If they are expanding/growing, pitch a web/app rebuild to support scaling.
+- Estimate their employee headcount (e.g. 10, 50) and annual revenue (e.g. "$1M - $5M") based on context.
+- Deduce technical problems (e.g. "No SSL", "Slow website") and put them in "digitalWeaknesses".
+- Map all "criticalPainPoints" and "digitalWeaknesses" directly to the services you sell.
+- Be highly specific and factual. Do not hallucinate.
+
 You must return a valid JSON object strictly matching this structure:
 {
-  "whyMatch": "A brief, compelling paragraph on why this company is a great match.",
+  "whyMatch": "A ruthless, compelling paragraph on exactly why they urgently need web/app development or AI automation.",
   "buyingSignals": [
     {
       "icon": "Material Symbols icon name, e.g., trending_up",
       "title": "Short title for the signal",
-      "description": "Detailed description of the buying signal"
+      "description": "Detailed description of the buying signal (e.g. from news)"
     }
   ],
-  "outreachStrategy": "Customized outreach strategy paragraph.",
+  "outreachStrategy": "A sharp, actionable Cold Email or LinkedIn Voice Note strategy.",
   "criticalPainPoints": ["Pain point 1", "Pain point 2"],
-  "companyMaturity": "Estimated company maturity, e.g., Series A Startup, Enterprise",
+  "companyMaturity": "Estimated company maturity based on context",
   "digitalWeaknesses": ["Weakness 1", "Weakness 2"],
   "growthScore": 85,
   "aiReadiness": "Assessment of AI readiness",
   "likelihoodToNeedServices": "Assessment of likelihood to need services",
-  "suggestedSalesAngle": "Suggested sales angle",
-  "recommendedOutreach": "Recommended outreach message or next step"
+  "suggestedSalesAngle": "A brilliant, unique sales angle or 'Cold Email Hook' to grab their attention.",
+  "recommendedOutreach": "Recommended outreach message or next step",
+  "estimatedEmployeesMin": 10,
+  "estimatedEmployeesMax": 50,
+  "estimatedRevenue": "$1M - $5M",
+  "websiteScore": 42,
+  "recommendedServices": ["Website redesign", "AI chatbot"],
+  "estimatedProjectValue": "$8,000–15,000"
 }`;
 
     const userPrompt = `
@@ -83,20 +144,41 @@ You must return a valid JSON object strictly matching this structure:
       Location: ${company.location}
       Employees: ${company.employeeSizeMin}-${company.employeeSizeMax}
       Tech Stack: ${company.techStack.map(t => t.name).join(', ')}
+      Tech/Hiring Context:
+      ${techSignalsContext}
+      Growth Context:
+      ${growthSignalsContext}
+      Mobile App Context (App Store presence or app-related news):
+      ${appSignalsContext}
     `;
 
     const aiResult = await this.generateWithRetry(systemPrompt, userPrompt);
 
     const finalResult = aiResult || {
-      whyMatch: `${company.name} recently expanded their operations. Their current tech stack lacks automated governance tools.`,
+      whyMatch: `${company.name} recently appeared in the news. Analyzing their public profile indicates expansion.`,
       buyingSignals: [
-        { icon: 'trending_up', title: 'Recent Growth', description: 'Significant increase in headcount.' }
+        { icon: 'trending_up', title: 'Recent Activity', description: 'Company is active online.' }
       ],
-      outreachStrategy: `"I noticed your recent expansion. Many leaders in ${company.industry} struggle with..."`,
+      outreachStrategy: `"I noticed your recent news online. Many leaders in ${company.industry} struggle with..."`,
       criticalPainPoints: ['Manual reporting', 'Tool sprawl'],
       companyMaturity: 'Growth Phase',
-      digitalWeaknesses: ['No active LinkedIn presence', 'Basic website conversion path']
+      digitalWeaknesses: ['Needs modernized web presence', 'No chatbot'],
+      estimatedEmployeesMin: 1,
+      estimatedEmployeesMax: 10,
+      estimatedRevenue: "$0 - $1M",
+      websiteScore: 42,
+      recommendedServices: ["Website redesign", "AI chatbot"],
+      estimatedProjectValue: "$5,000–10,000"
     };
+
+    await this.prisma.company.update({
+      where: { id: companyId },
+      data: {
+        employeeSizeMin: finalResult.estimatedEmployeesMin || 1,
+        employeeSizeMax: finalResult.estimatedEmployeesMax || 10,
+        annualRevenue: finalResult.estimatedRevenue || "$0 - $1M"
+      }
+    });
 
     return this.prisma.aIInsight.upsert({
       where: { companyId },
@@ -106,7 +188,10 @@ You must return a valid JSON object strictly matching this structure:
         outreachStrategy: finalResult.outreachStrategy,
         criticalPainPoints: finalResult.criticalPainPoints || [],
         companyMaturity: finalResult.companyMaturity,
-        digitalWeaknesses: finalResult.digitalWeaknesses || []
+        digitalWeaknesses: finalResult.digitalWeaknesses || [],
+        websiteScore: finalResult.websiteScore || 50,
+        recommendedServices: finalResult.recommendedServices || [],
+        estimatedProjectValue: finalResult.estimatedProjectValue || "N/A"
       },
       create: {
         companyId,
@@ -115,7 +200,10 @@ You must return a valid JSON object strictly matching this structure:
         outreachStrategy: finalResult.outreachStrategy,
         criticalPainPoints: finalResult.criticalPainPoints || [],
         companyMaturity: finalResult.companyMaturity,
-        digitalWeaknesses: finalResult.digitalWeaknesses || []
+        digitalWeaknesses: finalResult.digitalWeaknesses || [],
+        websiteScore: finalResult.websiteScore || 50,
+        recommendedServices: finalResult.recommendedServices || [],
+        estimatedProjectValue: finalResult.estimatedProjectValue || "N/A"
       }
     });
   }
